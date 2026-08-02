@@ -1,0 +1,92 @@
+name: CI
+
+# Fast feedback on every push and PR: Python tests, the ADR-010 guard, and a
+# real frontend build. Deliberately does NOT run the scrapers — Basketball-
+# Reference rate-limits at 20 req/min and has banned this project's IP before,
+# so hitting it on every push would be both slow and hostile. The nightly
+# workflow owns all network access.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    name: ETL tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Guard — no live stats.nba.com calls (ADR-010)
+        run: |
+          # nba_api may be imported ONLY for its offline static player table.
+          # Any endpoints import means a live stats.nba.com request, which is
+          # blocked from datacenter IPs and would break the nightly workflow.
+          if grep -rn "nba_api.stats.endpoints\|from nba_api.stats import endpoints" etl/; then
+            echo "::error::ADR-010 violation: etl/ imports nba_api endpoints (live stats.nba.com)."
+            exit 1
+          fi
+          echo "OK: nba_api usage confined to the offline static module."
+
+      - name: Run unit tests
+        run: python -m pytest tests/ -q
+
+  web:
+    name: Frontend build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install
+        run: npm ci --prefix web
+
+      - name: Build
+        # `prebuild` stages data/processed into web/public/data, so this also
+        # proves the committed dataset is present and well-formed.
+        run: npm run build --prefix web
+
+      - name: Verify the built site shipped real data
+        run: |
+          # A green build that shipped mock data is worse than a red one,
+          # because it looks correct.
+          test -f web/dist/data/players.json || {
+            echo "::error::players.json missing from dist"; exit 1; }
+          if grep -q '"is_mock": *true' web/dist/data/meta.json 2>/dev/null; then
+            echo "::error::built site contains MOCK data"
+            exit 1
+          fi
+          # Band matches _verify() in etl/build.py — keep the two in step.
+          python3 -c "
+          import json,sys
+          p=json.load(open('web/dist/data/players.json'))
+          print(f'shipped {len(p)} players')
+          sys.exit(0 if 250 <= len(p) <= 600 else 1)
+          "
+          echo "headshots staged: $(ls web/dist/data/headshots 2>/dev/null | wc -l)"

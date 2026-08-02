@@ -1,0 +1,24 @@
+# Vercel only needs the frontend source plus data/processed (the build stages
+# that into web/public/data). Everything below is either regenerated, huge, or
+# irrelevant to a static build.
+
+# The Python ETL runs in GitHub Actions, never on Vercel.
+etl/
+tests/
+requirements.txt
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Scrape cache — gitignored anyway, but belt and braces: this is the single
+# biggest thing that could bloat a deployment if it ever got committed.
+data/raw/
+
+node_modules/
+web/dist/
+.git/
+.github/
+.gstack/
+.DS_Store

@@ -1,0 +1,17 @@
+# HTTP + parsing
+requests>=2.32
+beautifulsoup4>=4.12
+lxml>=5.0
+
+# Data
+pandas>=2.2
+numpy>=2.0
+scipy>=1.14
+
+# NBA player ID crosswalk ONLY — see ADR-010.
+# We use nba_api.stats.static.players, which reads bundled local data and makes
+# zero network calls. No stats.nba.com endpoint is ever contacted.
+nba_api>=1.4
+
+# Dev
+pytest>=8.0

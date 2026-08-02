@@ -1,0 +1,27 @@
+{
+  "name": "nba-contract-value-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Frontend for the NBA contract-value dashboard: zoom-driven headshot scatter, surplus leaderboard, team rollup and player detail.",
+  "scripts": {
+    "dev": "vite",
+    "prebuild": "node scripts/stage-data.mjs",
+    "build": "vite build",
+    "preview": "vite preview",
+    "mock": "node scripts/generate-mock-data.mjs",
+    "link-data": "node scripts/link-processed-data.mjs"
+  },
+  "dependencies": {
+    "@deck.gl/core": "^9.3.0",
+    "@deck.gl/layers": "^9.3.0",
+    "@deck.gl/react": "^9.3.0",
+    "motion": "^12.43.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.3.5"
+  }
+}

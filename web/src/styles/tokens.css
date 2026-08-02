@@ -1,0 +1,232 @@
+/* =========================================================================
+   Design tokens — NBA contract value dashboard
+
+   One source of truth for colour, type, spacing, radius, elevation and
+   motion. Imported first by styles.css so every rule downstream can lean on
+   it. Nothing in this file paints anything; it only names values.
+
+   Ground rules baked in here:
+     - The surface is PURE WHITE by explicit product requirement. The neutral
+       ramp is built UP from white; it is never inverted.
+     - Colour carries exactly one meaning: surplus polarity.
+       blue = underpaid (team wins the deal), red = overpaid.
+     - Numbers are tabular everywhere. This is a dashboard of dollar figures
+       and proportional digits make columns jitter.
+     - Motion honours prefers-reduced-motion, always.
+
+   Legacy aliases (--step-*, --radius, --ink-*, ...) are kept at the bottom
+   so sections not yet migrated keep rendering identically.
+   ========================================================================= */
+
+:root {
+  /* --------------------------------------------------------------- colour
+     Neutral ramp. Cool-neutral (zinc family), anchored on #ffffff at 0 and
+     near-black at 950. Steps 25-150 are the whisper range used for washes
+     and hovers; 200/300 are hairlines; 500+ are legible as text on white. */
+  --n-0: #ffffff;
+  --n-25: #fcfcfd;
+  --n-50: #fafafa;
+  --n-100: #f4f4f5;
+  --n-150: #eeeef0;
+  --n-200: #e4e4e7;
+  --n-300: #d4d4d8;
+  --n-400: #a1a1aa;
+  --n-500: #71717a;
+  --n-600: #52525b;
+  --n-700: #3f3f46;
+  --n-800: #27272a;
+  --n-900: #18181b;
+  --n-950: #09090b;
+
+  /* Semantic surfaces */
+  --surface: var(--n-0);
+  --surface-raised: var(--n-0);
+  --surface-sunken: var(--n-50);
+  --surface-wash: var(--n-100);
+  --surface-hover: var(--n-50);
+  --surface-active: var(--n-150);
+  --surface-inverse: var(--n-950);
+  --on-inverse: var(--n-0);
+
+  /* Semantic borders */
+  --border: var(--n-200);
+  --border-strong: var(--n-300);
+  --border-subtle: var(--n-150);
+
+  /* Semantic text. ink-1 body, ink-2 secondary, ink-3 labels (4.8:1 on
+     white, still legible), ink-4 decorative only — never load-bearing. */
+  --ink-1: var(--n-950);
+  --ink-2: var(--n-600);
+  --ink-3: var(--n-500);
+  --ink-4: var(--n-400);
+
+  /* Polarity. The -mark values are what deck.gl draws (mirrored in
+     src/model/constants.js) and are tuned for CVD separation. The -ink
+     values are the darker text-safe siblings (>= 5:1 on white); use those
+     any time the colour is applied to type rather than to a mark. */
+  --pos-mark: #2a78d6;
+  --pos-ink: #1f68c4;
+  --pos-soft: #eff5fd;
+  --pos-border: #bcd8f7;
+  --neg-mark: #e34948;
+  --neg-ink: #c62f2e;
+  --neg-soft: #fdefef;
+  --neg-border: #f7c9c8;
+  --neutral-mark: #d4d4d8;
+
+  --focus: var(--pos-ink);
+  --accent: var(--pos-ink);
+
+  /* ----------------------------------------------------------- typography
+     System stack, zero network cost — this deploys to GitHub Pages and new
+     runtime network dependencies are forbidden by an earlier decision. The
+     stack is ordered so each platform lands on its neutral grotesque. */
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'SF Pro Text', 'Segoe UI Variable Text',
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: var(--font-sans);
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Modular scale, ~1.2 through the text range with a wider jump into
+     display sizes. Base is 15px. */
+  --text-2xs: 0.6875rem; /* 11 */
+  --text-xs: 0.75rem; /*    12 */
+  --text-sm: 0.8125rem; /*  13 */
+  --text-base: 0.9375rem; /* 15 */
+  --text-lg: 1.125rem; /*   18 */
+  --text-xl: 1.5rem; /*     24 */
+  --text-2xl: 2rem; /*      32 */
+  --text-3xl: 2.5rem; /*    40 */
+
+  --leading-none: 1;
+  --leading-tight: 1.12;
+  --leading-snug: 1.28;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.6;
+
+  /* Tight negative tracking on headings; positive tracking only on the
+     small uppercase labels, where it is doing real legibility work. */
+  --tracking-tighter: -0.032em;
+  --tracking-tight: -0.018em;
+  --tracking-normal: 0em;
+  --tracking-caps: 0.08em;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* -------------------------------------------------------------- spacing
+     4px rhythm. Names are multiples of 4, so --space-6 is 24px. */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* --------------------------------------------------------------- radius */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-pill: 999px;
+
+  /* ------------------------------------------------------------ elevation
+     A progression from "barely there" to a real lift on hover. Shadows are
+     tinted with the neutral hue, never pure black. */
+  --shadow-none: 0 0 0 0 rgba(9, 9, 11, 0);
+  --shadow-xs: 0 1px 2px rgba(9, 9, 11, 0.04);
+  --shadow-sm: 0 1px 2px rgba(9, 9, 11, 0.05), 0 1px 3px rgba(9, 9, 11, 0.04);
+  --shadow-md: 0 2px 4px -1px rgba(9, 9, 11, 0.05), 0 6px 14px -4px rgba(9, 9, 11, 0.08);
+  --shadow-lg: 0 4px 8px -2px rgba(9, 9, 11, 0.05), 0 14px 32px -8px rgba(9, 9, 11, 0.14);
+
+  /* ---------------------------------------------------------------- motion
+     --ease-signature is the house curve: a long, confident ease-in-out used
+     for anything that moves more than a few pixels. --ease-spring overshoots
+     slightly, standing in for spring physics without a JS animation lib. */
+  --ease-signature: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --duration-instant: 90ms;
+  --duration-fast: 160ms;
+  --duration-base: 240ms;
+  --duration-slow: 400ms;
+  --duration-slower: 520ms;
+
+  /* Interval between items in a staggered reveal. */
+  --stagger: 50ms;
+
+  /* ------------------------------------------------------- legacy aliases
+     Kept so sections not yet migrated to the tokens above render exactly as
+     before. New rules should use the semantic names, not these. */
+  --ink: var(--ink-1);
+  --hairline: var(--border);
+  --hairline-strong: var(--border-strong);
+  --wash: var(--surface-wash);
+  --pos: var(--pos-mark);
+  --neg: var(--neg-mark);
+  --radius: 8px;
+  --radius-lg: 12px;
+  --sans: var(--font-sans);
+  --mono: var(--font-mono);
+  --step--1: var(--text-xs);
+  --step-0: var(--text-sm);
+  --step-1: var(--text-base);
+  --step-2: var(--text-lg);
+  --step-3: var(--text-xl);
+  --step-4: var(--text-2xl);
+}
+
+/* Dollars, percentages, seasons and ranks all sit in columns somewhere in
+   this app. Tabular figures globally means nothing ever shifts width when a
+   value updates. */
+html,
+body {
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------- motion policy
+   One place, honoured app-wide. Reference-site behaviour: reduced motion
+   means no transition, not a faster one. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ------------------------------------------------------------- primitives
+   Shared entrance used by staggered groups. Each item sets --enter-index;
+   the delay falls out of the stagger token. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.enter {
+  animation: rise-in var(--duration-slower) var(--ease-signature) both;
+  animation-delay: calc(var(--enter-index, 0) * var(--stagger));
+}

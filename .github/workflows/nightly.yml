@@ -1,0 +1,158 @@
+name: Nightly data refresh
+
+# ADR-004 / ADR-009: nightly ETL on GitHub Actions, committed artifacts served
+# as a static site — now hosted on Vercel rather than GitHub Pages.
+#
+# This runs on a GitHub-hosted runner, i.e. a datacenter IP. That is fine
+# *specifically because* of ADR-010: the pipeline never contacts stats.nba.com,
+# which blacklists datacenter IP ranges and fingerprints TLS handshakes. NBA
+# player IDs come from nba_api's bundled offline table; all statistics come
+# from Basketball-Reference. If a future change introduces a live stats.nba.com
+# call, this workflow is where it will start silently failing — the guard step
+# in ci.yml exists to catch that at review time instead.
+#
+# This is the ONLY workflow permitted to touch the network sources. Everything
+# else builds from the committed dataset.
+
+on:
+  schedule:
+    # 11:00 UTC ~= 06:00 ET — after every game has finalized and BBRef has
+    # ingested the previous night's box scores.
+    - cron: "0 11 * * *"
+  workflow_dispatch:        # manual trigger, also used to verify ADR-010 holds
+
+concurrency:
+  # Never let two builds race to commit data/processed.
+  group: nightly-etl
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    name: Scrape, rebuild, deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    env:
+      # Secrets are unavailable in job-level `if:`, so gate on a plain env flag.
+      HAS_VERCEL: ${{ secrets.VERCEL_TOKEN != '' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run unit tests
+        # Refuse to publish a dataset built by code that cannot pass its tests.
+        run: python -m pytest tests/ -q
+
+      - name: Rebuild dataset
+        # --refresh re-scrapes. Basketball-Reference allows 20 req/min and bans
+        # for up to an hour on violation; etl/ratelimit.py enforces the budget
+        # across processes with a flock-guarded sliding window.
+        run: python -m etl.build --refresh --verify --verbose
+
+      - name: Summarize output
+        if: always()
+        run: |
+          if [ -f data/processed/meta.json ]; then
+            python - <<'PY'
+          import json, os, pathlib
+          meta = json.loads(pathlib.Path("data/processed/meta.json").read_text())
+          summary = pathlib.Path(os.environ["GITHUB_STEP_SUMMARY"])
+          with summary.open("a") as fh:
+              fh.write("## Nightly ETL\n\n")
+              fh.write(f"- Players: **{meta['player_count']}**\n")
+              fh.write(f"- Excluded below floor: {meta['excluded_count']}\n")
+              fh.write(f"- Stats season: {meta['stats_season']}\n")
+              fh.write(f"- Salary season: {meta['salary_season']}\n")
+              fh.write(f"- Generated: {meta['generated_at']}\n\n")
+              for mode, fit in meta.get("regression", {}).items():
+                  fh.write(
+                      f"- Regression `{mode}`: slope={fit.get('slope'):.4f} "
+                      f"r²={fit.get('r2'):.3f} n={fit.get('n')}\n"
+                  )
+          PY
+          fi
+
+      - name: Commit refreshed data
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/processed
+          if git diff --staged --quiet; then
+            echo "No data changes."
+          else
+            git commit -m "data: nightly refresh $(date -u +%Y-%m-%d)"
+            git push
+          fi
+
+      # ---------------------------------------------------------------- build
+
+      - name: Install frontend
+        run: npm ci --prefix web
+
+      - name: Build frontend
+        # `prebuild` (web/scripts/stage-data.mjs) copies data/processed and the
+        # mirrored headshots into web/public/data. Headshots MUST be same-origin:
+        # cdn.nba.com sends no Access-Control-Allow-Origin and WebGL refuses to
+        # texture a cross-origin image, so a CDN-sourced IconLayer renders
+        # nothing. See etl/sources/headshots.py.
+        run: npm run build --prefix web
+
+      - name: Verify the built site shipped real data
+        run: |
+          test -f web/dist/data/players.json || {
+            echo "::error::players.json missing from dist"; exit 1; }
+          if grep -q '"is_mock": *true' web/dist/data/meta.json 2>/dev/null; then
+            echo "::error::built site contains MOCK data"
+            exit 1
+          fi
+          python3 -c "
+          import json,sys
+          p=json.load(open('web/dist/data/players.json'))
+          print(f'shipped {len(p)} players')
+          sys.exit(0 if 250 <= len(p) <= 600 else 1)
+          "
+
+      # --------------------------------------------------------------- deploy
+      # Skipped automatically when VERCEL_TOKEN is absent — which is the correct
+      # no-op if you chose Vercel's own Git integration instead, since the data
+      # commit above already triggers a redeploy there.
+
+      - name: Deploy to Vercel (production)
+        if: env.HAS_VERCEL == 'true'
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          npm i -g vercel@latest
+          # Deploy the artifact we just built and verified, rather than letting
+          # Vercel rebuild from source — that guarantees what ships is exactly
+          # what passed the checks above.
+          vercel pull --yes --environment=production --token="${{ secrets.VERCEL_TOKEN }}"
+          vercel build --prod --token="${{ secrets.VERCEL_TOKEN }}"
+          vercel deploy --prebuilt --prod --token="${{ secrets.VERCEL_TOKEN }}" > .vercel-url
+          echo "Deployed: $(cat .vercel-url)" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Note when deploy was skipped
+        if: env.HAS_VERCEL != 'true'
+        run: |
+          echo "VERCEL_TOKEN not set — skipping the CLI deploy." >> "$GITHUB_STEP_SUMMARY"
+          echo "If Vercel's Git integration is connected, the data commit above already redeployed." >> "$GITHUB_STEP_SUMMARY"

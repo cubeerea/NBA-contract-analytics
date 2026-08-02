@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.vite/
+*.local
+
+# `npm run link-data` replaces public/data with a symlink to ../data/processed.
+# The mock JSON that lives here otherwise IS committed, so a fresh clone can
+# run `npm run dev` without the Python pipeline.
+public/data/players.json.bak

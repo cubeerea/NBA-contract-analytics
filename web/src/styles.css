@@ -1,0 +1,3325 @@
+@import './styles/tokens.css';
+
+/* =========================================================================
+   NBA contract value dashboard
+
+   Background is white by explicit requirement, so structure is carried by
+   hairlines, spacing and weight rather than by fills. Colour is reserved for
+   one thing only: surplus polarity (blue = underpaid, red = overpaid).
+   Contract type never uses colour - it uses a glyph plus a word.
+   ========================================================================= */
+
+/* Every token — colour, type, spacing, radius, elevation, motion — lives in
+   ./styles/tokens.css, imported at the top of this file. Nothing is redefined
+   here; if you need a new value, name it there first. */
+:root {
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+  background: var(--surface);
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+dl,
+dd,
+figure {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.92em;
+  background: var(--wash);
+  padding: 0.08em 0.32em;
+  border-radius: 4px;
+}
+
+kbd {
+  font-family: var(--mono);
+  font-size: 0.85em;
+  border: 1px solid var(--hairline-strong);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  padding: 0.05em 0.32em;
+}
+
+.muted {
+  color: var(--ink-3);
+  font-weight: 400;
+}
+.muted.block {
+  display: block;
+  font-size: var(--step--1);
+  margin-top: 2px;
+}
+.pos {
+  color: var(--pos);
+}
+.neg {
+  color: var(--neg);
+}
+.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------------- shell */
+
+.app-shell {
+  max-width: 1560px;
+  margin: 0 auto;
+  padding: var(--space-8) clamp(var(--space-4), 3vw, var(--space-10)) var(--space-16);
+}
+
+.app-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tighter);
+  line-height: var(--leading-tight);
+  color: var(--ink-1);
+}
+
+/* The two seasons this dashboard reconciles. They used to render as the bare
+   string "2025-26 -> 2026-27", which told the reader nothing. Each season now
+   carries its own word and they are separated by an actual rule, not a glyph. */
+.season-pair {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-4);
+  margin-top: var(--space-3);
+}
+
+.season-unit {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.season-unit + .season-unit {
+  padding-left: var(--space-4);
+  border-left: 1px solid var(--border);
+}
+
+.season-key {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.season-value {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--ink-1);
+}
+
+.mock-banner,
+.warning-banner {
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-sunken);
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+  color: var(--ink-2);
+}
+
+.mock-banner strong {
+  color: var(--ink-1);
+  font-weight: var(--weight-semibold);
+}
+
+.warning-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  border-color: #f0dcb4;
+  background: #fdf8ee;
+}
+.warning-icon {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-pill);
+  background: #e0a01a;
+  color: var(--n-0);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-2xs);
+  display: grid;
+  place-items: center;
+}
+
+/* ---------------------------------------------------------- mode toggle */
+
+/* Two arguable constants, two controls. They stack rather than compete for
+   one line, and each keeps its own written label. */
+.header-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-3) var(--space-6);
+}
+
+.mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.mode-label {
+  font-size: var(--step--1);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--ink-3);
+  font-weight: 600;
+}
+
+.segmented {
+  display: inline-flex;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.seg {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  align-items: flex-start;
+  padding: 6px 12px;
+  background: var(--surface);
+  border: none;
+  border-right: 1px solid var(--hairline);
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+.seg:last-child {
+  border-right: none;
+}
+.seg:hover {
+  background: var(--wash);
+}
+.seg.active {
+  background: var(--ink);
+  color: #fff;
+}
+.seg-name {
+  font-size: var(--step-0);
+  font-weight: 600;
+}
+.seg-value {
+  font-size: var(--step--1);
+  font-variant-numeric: tabular-nums;
+  opacity: 0.7;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--pos);
+  font-size: var(--step-0);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: var(--step-0);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+.button:hover {
+  background: var(--wash);
+}
+.button.wide {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  border: none;
+  background: none;
+  color: var(--ink-3);
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px;
+}
+.icon-button:hover {
+  color: var(--ink);
+}
+
+/* ------------------------------------------------------- headline strip */
+
+.headline-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: var(--space-3);
+  margin: var(--space-6) 0 var(--space-7);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-1);
+  padding: var(--space-5);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xs);
+  text-align: left;
+  color: inherit;
+  transition:
+    box-shadow var(--duration-slower) var(--ease-signature),
+    border-color var(--duration-slower) var(--ease-signature),
+    transform var(--duration-slower) var(--ease-signature);
+}
+
+.stat-label {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--ink-3);
+  font-weight: var(--weight-semibold);
+}
+
+.stat-value {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tighter);
+  line-height: var(--leading-tight);
+  color: var(--ink-1);
+  margin-top: var(--space-1);
+}
+/* Player names are words, not figures: they get the smaller size so a long
+   name never wraps into a second line and breaks the row rhythm. */
+.stat-value.is-name {
+  font-size: var(--text-lg);
+  letter-spacing: var(--tracking-tight);
+}
+
+.stat-sub {
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+  line-height: var(--leading-snug);
+}
+.stat-sub.pos {
+  color: var(--pos-ink);
+  font-weight: var(--weight-semibold);
+}
+.stat-sub.neg {
+  color: var(--neg-ink);
+  font-weight: var(--weight-semibold);
+}
+
+/* Clickable stats say so. The cue is a word plus a chevron that slides on
+   hover, plus the card lifting — not a bare arrow floating in space. */
+.stat.interactive {
+  cursor: pointer;
+  padding-bottom: var(--space-4);
+}
+.stat.interactive:hover,
+.stat.interactive:focus-visible {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.stat-action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  /* Pinned to the bottom of the card so the cue sits on one line across the
+     whole strip even when a sub-line wraps. */
+  margin-top: auto;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-subtle);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  transition: color var(--duration-base) var(--ease-out);
+}
+.stat-action svg {
+  transition: transform var(--duration-base) var(--ease-spring);
+}
+.stat.interactive:hover .stat-action,
+.stat.interactive:focus-visible .stat-action {
+  color: var(--accent);
+}
+.stat.interactive:hover .stat-action svg,
+.stat.interactive:focus-visible .stat-action svg {
+  transform: translateX(3px);
+}
+
+/* ----------------------------------------------------------------- tabs */
+
+.view-tabs {
+  display: flex;
+  gap: var(--space-1);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.view-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  cursor: pointer;
+  white-space: nowrap;
+  text-align: left;
+  color: var(--ink-3);
+  transition:
+    color var(--duration-fast) var(--ease-standard),
+    background var(--duration-fast) var(--ease-standard);
+}
+/* The active marker is its own element so it can slide in with the house
+   easing instead of snapping on as a border swap. */
+.tab::after {
+  content: '';
+  position: absolute;
+  left: var(--space-2);
+  right: var(--space-2);
+  bottom: -1px;
+  height: 2px;
+  border-radius: var(--radius-pill);
+  background: var(--ink-1);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--duration-slower) var(--ease-signature);
+}
+.tab:hover {
+  color: var(--ink-1);
+  background: var(--surface-hover);
+}
+.tab.active {
+  color: var(--ink-1);
+}
+.tab.active::after {
+  transform: scaleX(1);
+}
+.tab-label {
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-tight);
+}
+.tab.active .tab-label {
+  font-weight: var(--weight-semibold);
+}
+
+/* -------------------------------------------------------------- filters */
+
+.filter-bar {
+  padding: 14px 0 16px;
+  border-bottom: 1px solid var(--hairline);
+  display: grid;
+  gap: 12px;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 20px;
+  align-items: flex-end;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.field.grow {
+  flex: 1 1 320px;
+}
+.field.inline {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.field-label {
+  font-size: var(--step--1);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  font-weight: 600;
+  padding: 0;
+}
+.field-value {
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+
+input[type='search'],
+select {
+  font: inherit;
+  font-size: var(--step-0);
+  padding: 6px 10px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--ink);
+  min-width: 0;
+}
+.filter-search {
+  flex: 1 1 180px;
+  max-width: 240px;
+}
+.filter-search input {
+  width: 100%;
+}
+.filter-positions {
+  flex: 0 0 auto;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: var(--step-0);
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+.chip:hover {
+  background: var(--wash);
+}
+.chip.active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+.chip .glyph {
+  font-size: 0.85em;
+  line-height: 1;
+}
+
+.filter-age {
+  flex: 1 1 200px;
+  max-width: 260px;
+  gap: 2px;
+}
+.filter-age-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.filter-age-value {
+  font-size: var(--step-0);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+.filter-reset {
+  margin-left: auto;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: var(--step--1);
+  color: var(--ink-3);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+.filter-reset:hover {
+  color: var(--ink);
+}
+
+/* dual-handle range */
+
+.range {
+  padding: 0 10px;
+}
+.range-track {
+  position: relative;
+  height: 30px;
+  touch-action: none;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.range-rail,
+.range-fill {
+  position: absolute;
+  top: 50%;
+  height: 8px;
+  margin-top: -4px;
+  border-radius: 999px;
+}
+.range-rail {
+  left: 0;
+  right: 0;
+  background: var(--hairline);
+}
+.range-fill {
+  background: var(--pos);
+}
+.range-handle {
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid var(--pos);
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: 0 1px 3px rgba(11, 11, 11, 0.2);
+  cursor: grab;
+  touch-action: none;
+}
+.range-handle:hover {
+  background: var(--pos-soft);
+}
+.range-dragging .range-handle {
+  cursor: grabbing;
+}
+.range-scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: -3px;
+  font-size: var(--step--1);
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+/* popover multi-select */
+
+.facet {
+  position: relative;
+  flex: 0 0 auto;
+}
+.facet-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  min-width: 108px;
+  padding: 6px 10px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: var(--step-0);
+  cursor: pointer;
+}
+.facet-trigger:hover {
+  background: var(--wash);
+}
+.facet-trigger.has-value {
+  border-color: var(--ink);
+  font-weight: 600;
+}
+.facet-caret {
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid var(--ink-3);
+}
+.facet-panel {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 264px;
+  max-width: calc(100vw - 32px);
+  padding: 6px;
+  background: var(--surface);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(11, 11, 11, 0.12);
+}
+.facet-panel.align-right {
+  left: auto;
+  right: 0;
+}
+.facet-search {
+  width: 100%;
+  margin-bottom: 6px;
+}
+.facet-options {
+  max-height: 264px;
+  overflow-y: auto;
+}
+.facet-group + .facet-group {
+  margin-top: 6px;
+}
+.facet-group-label {
+  padding: 4px 6px 2px;
+  font-size: var(--step--1);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  font-weight: 600;
+}
+.facet-group-items {
+  display: grid;
+  gap: 2px;
+}
+.facet-option {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+  padding: 6px 7px;
+  border: none;
+  border-radius: 5px;
+  background: none;
+  font-size: var(--step-0);
+  text-align: left;
+  cursor: pointer;
+}
+.facet-option:hover {
+  background: var(--wash);
+}
+.facet-option.active {
+  font-weight: 600;
+}
+.facet-mark {
+  flex: 0 0 auto;
+  width: 13px;
+  height: 13px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 3px;
+}
+.facet-option.active .facet-mark {
+  background: var(--pos);
+  border-color: var(--pos);
+}
+.facet-option .glyph {
+  font-size: 0.85em;
+  line-height: 1;
+}
+.facet-option-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.facet-empty {
+  padding: 10px 8px;
+  font-size: var(--step-0);
+  color: var(--ink-3);
+}
+.facet-clear {
+  width: 100%;
+  margin-top: 6px;
+  padding: 7px 6px 3px;
+  border: none;
+  border-top: 1px solid var(--hairline);
+  background: none;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.facet-clear:hover {
+  color: var(--ink);
+}
+
+/* count + active filter tags */
+
+.filter-count {
+  margin-left: auto;
+  display: flex;
+  gap: 2px;
+  padding-bottom: 5px;
+  font-size: var(--step-0);
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.filter-count strong {
+  color: var(--ink);
+}
+
+.filter-active {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.filter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px 3px 10px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 999px;
+  background: var(--wash);
+  font-size: var(--step--1);
+  cursor: pointer;
+}
+.filter-tag:hover {
+  border-color: var(--ink);
+}
+.filter-tag-x {
+  flex: none;
+  color: var(--ink-3);
+}
+.filter-tag:hover .filter-tag-x {
+  color: var(--ink);
+}
+.filter-clear-all {
+  padding: 3px 4px;
+  border: none;
+  background: none;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+.filter-clear-all:hover {
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------- chart */
+
+.app-main {
+  padding-top: 20px;
+  min-height: 60vh;
+}
+
+.scatter-view {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 24px;
+  align-items: start;
+}
+
+.chart-shell {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.chart-canvas {
+  position: relative;
+  width: 100%;
+  height: clamp(420px, 62vh, 720px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow-xs);
+  touch-action: none;
+}
+
+.plot-grid,
+.plot-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.plot-grid {
+  z-index: 0;
+}
+.plot-overlay {
+  z-index: 3;
+}
+
+/* Tick labels. The first tier is the quantity, the second the unit it works
+   out to; the second is deliberately a shade lighter and a size smaller so the
+   pair reads as one label with a gloss, not as two competing numbers. */
+.plot-overlay .tick {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: var(--weight-medium);
+  fill: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.plot-overlay .tick-alt {
+  font-size: 9.5px;
+  font-weight: var(--weight-regular);
+  fill: var(--ink-4);
+}
+
+/* Axis titles: the quantity, then its unit underneath in the same voice as
+   the second tick tier, so the whole gutter has one hierarchy. */
+.plot-overlay .axis-title {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: var(--weight-semibold);
+  fill: var(--ink-2);
+  letter-spacing: var(--tracking-normal);
+}
+.plot-overlay .axis-unit {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: var(--weight-regular);
+  fill: var(--ink-4);
+}
+
+/* Reference lines. Each labels itself with a pill riding on the line, so the
+   dashed/solid distinction is settled in place instead of in a legend. */
+.plot-overlay .fit-line path:first-child {
+  opacity: 0.85;
+}
+.plot-overlay .fit-pill {
+  fill: var(--surface);
+  stroke: var(--border);
+  stroke-width: 1;
+}
+.plot-overlay .fit-label {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+}
+
+/* The model reference on the team-payroll axis. One dollar figure is a
+   different share of every roster, so it is honestly a wedge spanning the
+   league's leanest to richest payroll, with the median team as its centre
+   line. Neutral fill only - blue and red mean surplus. */
+.plot-overlay .fit-band {
+  fill: var(--n-500);
+  fill-opacity: 0.09;
+  stroke: var(--n-400);
+  stroke-opacity: 0.4;
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+}
+
+/* One cluster: a segmented zoom stepper sharing a single border, with Reset
+   held apart because it is a different kind of action. */
+.chart-controls {
+  position: absolute;
+  z-index: 5;
+  right: var(--space-3);
+  top: var(--space-3);
+  display: grid;
+  gap: var(--space-2);
+  justify-items: stretch;
+}
+
+.zoom-cluster {
+  display: grid;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.zoom-cluster button {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+}
+.zoom-cluster button + button {
+  border-top: 1px solid var(--border-subtle);
+}
+.zoom-cluster button:hover {
+  background: var(--surface-hover);
+  color: var(--ink-1);
+}
+.zoom-cluster button:active {
+  background: var(--surface-active);
+}
+
+.chart-reset {
+  padding: 0 var(--space-2);
+  height: 26px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font-sans);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-medium);
+  color: var(--ink-2);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: opacity var(--duration-base) var(--ease-signature),
+    background var(--duration-fast) var(--ease-standard);
+}
+.chart-reset:hover:not(:disabled) {
+  background: var(--surface-hover);
+  color: var(--ink-1);
+}
+/* Nothing to reset to: kept in the layout so the cluster never reflows, but
+   visibly inert rather than a dead affordance. */
+.chart-reset:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chart-canvas.no-webgl {
+  display: grid;
+  place-items: center;
+  padding: var(--space-6);
+}
+
+.empty-viewport {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  gap: var(--space-3);
+  justify-items: center;
+  padding: var(--space-5) var(--space-6);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+  text-align: center;
+}
+.empty-viewport-title {
+  margin: 0;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--ink-1);
+}
+
+/* ---- hover readout ----------------------------------------------------
+   A card, built from the same parts as the player card in the rail: a name,
+   labelled facts, a rule, then the figure the chart exists to show. Every
+   value sits under a word, so no separator character has to carry meaning. */
+
+.hover-readout {
+  position: absolute;
+  z-index: 6;
+  pointer-events: none;
+  width: 244px;
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  animation: readout-in var(--duration-fast) var(--ease-out) both;
+}
+
+@keyframes readout-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.readout-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+.readout-name {
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+  color: var(--ink-1);
+}
+/* Contract type as a word, never as a bare shape. */
+.readout-contract {
+  flex: none;
+  font-size: var(--text-2xs);
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+.readout-facts,
+.readout-money {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+  margin: 0;
+}
+.readout-facts > div,
+.readout-money > div {
+  display: grid;
+  gap: 1px;
+}
+.readout-span {
+  flex-basis: 100%;
+}
+.readout-facts dt,
+.readout-money dt {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-medium);
+  color: var(--ink-3);
+  letter-spacing: var(--tracking-normal);
+}
+.readout-facts dd,
+.readout-money dd {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--ink-1);
+  font-variant-numeric: tabular-nums;
+}
+/* The books this contract sits inside. Kept between the identity facts and
+   the money, because it is the fact that decides whether the money below is
+   survivable or ruinous. */
+.readout-payroll {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  background: var(--surface-sunken);
+  border-radius: var(--radius-sm);
+}
+.readout-payroll-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+.readout-payroll-key {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-medium);
+  color: var(--ink-3);
+}
+.readout-payroll-value {
+  font-size: var(--text-sm);
+  font-family: var(--font-mono);
+  letter-spacing: var(--tracking-tight);
+  color: var(--ink-1);
+}
+.readout-payroll-note {
+  font-size: var(--text-2xs);
+  line-height: var(--leading-snug);
+  color: var(--ink-3);
+}
+
+.readout-money {
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--border-subtle);
+}
+.readout-money dd {
+  font-size: var(--text-base);
+  font-family: var(--font-mono);
+  letter-spacing: var(--tracking-tight);
+}
+
+/* The one figure allowed to carry colour, because it is the one figure whose
+   meaning IS its polarity. */
+.readout-surplus {
+  display: grid;
+  gap: 1px;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid;
+  border-radius: var(--radius-md);
+}
+.readout-surplus.pos {
+  background: var(--pos-soft);
+  border-color: var(--pos-border);
+}
+.readout-surplus.neg {
+  background: var(--neg-soft);
+  border-color: var(--neg-border);
+}
+.readout-surplus-label {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--ink-2);
+}
+.readout-surplus-value {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tighter);
+  font-variant-numeric: tabular-nums;
+}
+.readout-surplus.pos .readout-surplus-value {
+  color: var(--pos-ink);
+}
+.readout-surplus.neg .readout-surplus-value {
+  color: var(--neg-ink);
+}
+
+/* ---- legend ----------------------------------------------------------- */
+
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  padding: 0 var(--space-1);
+  font-size: var(--text-xs);
+}
+.legend-label {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--ink-4);
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: var(--weight-medium);
+  color: var(--ink-2);
+}
+.legend-item.pos {
+  color: var(--pos-ink);
+}
+.legend-item.neg {
+  color: var(--neg-ink);
+}
+/* Only present on the team-payroll axis, where the model reference is a wedge
+   rather than a line and the reader is owed the reason in a few words. */
+.legend-item.legend-refit {
+  color: var(--ink-3);
+  font-weight: var(--weight-regular);
+}
+.swatch.band {
+  height: 10px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border-strong);
+  background: var(--n-150);
+}
+.legend-hint {
+  margin-left: auto;
+  color: var(--ink-3);
+}
+.swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  flex: none;
+}
+.swatch.ring {
+  border: 2px solid;
+  border-radius: 50%;
+  background: var(--surface);
+}
+
+/* ------------------------------------------------------------ side rail */
+
+.scatter-side,
+.leaderboard-side {
+  position: sticky;
+  top: 16px;
+  display: grid;
+  gap: 16px;
+}
+.side-stack {
+  display: grid;
+  gap: 16px;
+}
+
+.extreme-list h3 {
+  font-size: var(--step-0);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.extreme-list ul {
+  display: grid;
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.extreme-list button,
+.roster-list button,
+.search-results button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 7px 10px;
+  background: var(--surface);
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: var(--step-0);
+}
+.extreme-list button:hover,
+.roster-list button:hover,
+.search-results button:hover {
+  background: var(--wash);
+}
+.ex-name,
+.roster-name {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+}
+.ex-name .muted,
+.roster-name .muted {
+  font-size: var(--step--1);
+}
+.ex-value,
+.roster-value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------- player card */
+
+.headshot {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  border-radius: 50%;
+  background: var(--wash);
+  border: 1px solid var(--hairline);
+  overflow: hidden;
+}
+.headshot img {
+  width: 118%;
+  height: 118%;
+  object-fit: cover;
+  object-position: center 12%;
+}
+.headshot[data-fallback='true'] img {
+  width: 78%;
+  height: 78%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* The card is a two-sided object: identity and the verdict on the front,
+   the evidence behind that verdict on the back. `.player-card` is only the
+   stage - every painted surface lives on a face, because the shell has to be
+   transparent for the rotation to read as one card turning over. */
+.player-card {
+  perspective: 2000px;
+  perspective-origin: 50% 42%;
+}
+
+.pc-flip {
+  position: relative;
+  transform-style: preserve-3d;
+  transition:
+    transform var(--duration-slower) var(--ease-signature),
+    height var(--duration-slower) var(--ease-signature);
+}
+.pc-flip[data-flipped='true'] {
+  transform: rotateY(180deg);
+}
+
+.pc-face {
+  top: 0;
+  left: 0;
+  width: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-xs);
+  transition: box-shadow var(--duration-base) var(--ease-signature);
+}
+/* The front sits in flow so the shell still has a sane height before the
+   measured height lands (and if ResizeObserver is unavailable). */
+.pc-front {
+  position: relative;
+  transform: rotateY(0deg);
+}
+.pc-back {
+  position: absolute;
+  transform: rotateY(180deg);
+  gap: var(--space-3);
+}
+.player-card:hover .pc-face,
+.player-card:focus-within .pc-face {
+  box-shadow: var(--shadow-lg);
+}
+/* Belt and braces alongside `inert`: the face facing away is never a target. */
+.pc-face[aria-hidden='true'] {
+  pointer-events: none;
+}
+
+.pc-head {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+.pc-head-back {
+  align-items: center;
+}
+.pc-identity {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+.pc-identity h3 {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+}
+.pc-eyebrow {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: var(--weight-semibold);
+  color: var(--ink-3);
+}
+
+/* Team / position / age used to be four values glued together by middle
+   dots. They are three labelled cells now, divided by hairlines. */
+.pc-meta {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  border-block: 1px solid var(--border-subtle);
+}
+.pc-meta > div {
+  padding: var(--space-2) 0 var(--space-2) var(--space-3);
+  border-left: 1px solid var(--border-subtle);
+}
+.pc-meta > div:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+.pc-meta dt {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: var(--weight-semibold);
+  color: var(--ink-3);
+}
+.pc-meta dd {
+  margin: var(--space-1) 0 0;
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-none);
+}
+
+/* 61 of the 334 players signed somewhere other than where they played last
+   season, so the production below the fold was earned in another shirt.
+   That is worth saying out loud rather than hiding in a tooltip. */
+.pc-moved {
+  display: grid;
+  gap: 2px;
+  padding: var(--space-2) var(--space-3);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface-sunken);
+}
+.pc-moved-label {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: var(--weight-semibold);
+  color: var(--ink-3);
+}
+.pc-moved-text {
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+  line-height: var(--leading-snug);
+}
+
+/* The headline judgement. One number, one word for its direction, and the
+   two figures it was subtracted from - each labelled. */
+.pc-verdict {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: 1px solid;
+  border-radius: var(--radius-md);
+}
+.pc-verdict.pos {
+  background: var(--pos-soft);
+  border-color: var(--pos-border);
+}
+.pc-verdict.neg {
+  background: var(--neg-soft);
+  border-color: var(--neg-border);
+}
+.pc-verdict-label {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: var(--weight-semibold);
+}
+.pc-verdict-value {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tighter);
+  line-height: var(--leading-none);
+}
+.pc-verdict.pos .pc-verdict-label,
+.pc-verdict.pos .pc-verdict-value {
+  color: var(--pos-ink);
+}
+.pc-verdict.neg .pc-verdict-label,
+.pc-verdict.neg .pc-verdict-value {
+  color: var(--neg-ink);
+}
+.player-card.dense .pc-verdict-value {
+  font-size: var(--text-xl);
+}
+.pc-ledger {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  margin-top: var(--space-1);
+  border-top: 1px solid;
+}
+.pc-verdict.pos .pc-ledger {
+  border-top-color: var(--pos-border);
+}
+.pc-verdict.neg .pc-ledger {
+  border-top-color: var(--neg-border);
+}
+.pc-ledger dt {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: var(--weight-semibold);
+  color: var(--ink-2);
+}
+.pc-ledger dd {
+  margin: 2px 0 0;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--ink-1);
+}
+.pc-verdict-basis {
+  font-size: var(--text-xs);
+  color: var(--ink-2);
+}
+
+.pc-foot {
+  display: flex;
+  gap: var(--space-2);
+}
+.pc-foot .button {
+  flex: 1;
+}
+.pc-foot .ghost {
+  flex: 0 1 auto;
+  color: var(--ink-2);
+}
+/* The flip is the card's primary action, so it looks like one. */
+.flip-button {
+  background: var(--surface-inverse);
+  border-color: var(--surface-inverse);
+  color: var(--on-inverse);
+  font-weight: var(--weight-medium);
+}
+.flip-button:hover {
+  background: var(--n-800);
+  border-color: var(--n-800);
+}
+.pc-head-back .flip-button {
+  flex: none;
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-xs);
+}
+
+.pc-block {
+  display: grid;
+  gap: var(--space-3);
+}
+.pc-block + .pc-block {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-subtle);
+}
+.pc-block-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: var(--weight-semibold);
+  color: var(--ink-3);
+}
+.pc-block-note {
+  text-transform: none;
+  letter-spacing: var(--tracking-normal);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-regular);
+  color: var(--ink-3);
+}
+
+/* Back-face content arrives after the turn, one block at a time. Delays are
+   built from --stagger; the global reduced-motion rule collapses both the
+   duration and the delay, so this degrades to an instant reveal. */
+.pc-reveal {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition:
+    opacity var(--duration-base) var(--ease-signature),
+    transform var(--duration-base) var(--ease-signature);
+}
+.pc-flip[data-flipped='true'] .pc-reveal {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: calc(var(--duration-base) + var(--enter-index, 0) * var(--stagger));
+}
+
+.card-sub {
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+  margin-top: 3px;
+}
+
+.surplus-banner {
+  display: grid;
+  gap: 2px;
+  padding: 11px 13px;
+  border-radius: var(--radius);
+  border: 1px solid;
+}
+.surplus-banner.pos {
+  background: var(--pos-soft);
+  border-color: var(--pos-border);
+}
+.surplus-banner.neg {
+  background: var(--neg-soft);
+  border-color: var(--neg-border);
+}
+.surplus-value {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+}
+.surplus-banner.pos .surplus-value {
+  color: var(--pos-ink);
+}
+.surplus-banner.neg .surplus-value {
+  color: var(--neg-ink);
+}
+.surplus-caption {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--ink-2);
+  font-weight: var(--weight-semibold);
+}
+.surplus-formula {
+  font-size: var(--text-xs);
+  color: var(--ink-2);
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 16px;
+}
+.stat-grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.stat-grid dt {
+  font-size: var(--text-2xs);
+  color: var(--ink-3);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: var(--weight-semibold);
+}
+.stat-grid dd {
+  margin: var(--space-1) 0 0;
+  font-size: var(--text-base);
+  line-height: var(--leading-snug);
+}
+.stat-grid dd .muted {
+  font-size: var(--text-xs);
+}
+
+/* ------------------------------------------------------ payroll context
+
+   Where one contract sits inside the books that carry it. The rung reuses the
+   four-notch apron meter from the team table rather than inventing a second
+   encoding for the same fact; everything else is words and dollars, because
+   headroom is the part a reader has to be told rather than shown. */
+.payroll-context {
+  display: grid;
+  gap: var(--space-3);
+}
+.payroll-rung {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-sunken);
+  border-radius: var(--radius-sm);
+}
+.payroll-summary {
+  font-size: var(--text-xs);
+  line-height: var(--leading-snug);
+  color: var(--ink-1);
+  font-variant-numeric: tabular-nums;
+}
+.payroll-note {
+  font-size: var(--text-xs);
+  line-height: var(--leading-snug);
+  color: var(--ink-2);
+}
+.payroll-caveat {
+  font-size: var(--text-2xs);
+  line-height: var(--leading-snug);
+  color: var(--ink-4);
+}
+
+/* Contract type reads as a WORD in a pill. It used to lead with an abstract
+   glyph (a diamond, a triangle...) which, next to a name and a dollar
+   figure, read as debris. The redundant channel is the border: dashed means
+   the deal is CBA-capped and sits outside the regression fit. */
+.contract-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--space-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+  white-space: nowrap;
+  color: var(--ink-1);
+}
+.contract-chip[data-market='false'] {
+  border-style: dashed;
+  color: var(--ink-2);
+}
+.contract-chip.compact {
+  padding: 1px var(--space-2);
+  font-size: var(--text-2xs);
+}
+
+.flag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+.flag.ok {
+  color: #0a7a3f;
+}
+.flag.blocked {
+  color: var(--neg-ink);
+}
+/* The mark is a drawn SVG, never a typographic glyph. It sits beside a word
+   that already carries the meaning, so it is decoration with a job: keep it
+   optically aligned and out of the text's way. */
+.flag-mark {
+  flex: none;
+}
+
+.card-section h4,
+.compare-col h4 {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--ink-3);
+  font-weight: var(--weight-semibold);
+  margin-bottom: var(--space-2);
+}
+.card-note {
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+  line-height: var(--leading-normal);
+  margin-top: var(--space-2);
+}
+.card-foot {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.war-spread {
+  display: grid;
+  gap: var(--space-2);
+}
+.war-spread-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.war-headline {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+.war-blended {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-none);
+}
+.war-unit {
+  font-size: var(--text-xs);
+  color: var(--ink-2);
+}
+/* "spread 2.5 · 6.7-9.2" was two numbers held together by a dot. Two
+   labelled cells, split by a hairline. */
+.war-band {
+  display: flex;
+  gap: var(--space-3);
+}
+.war-band > div {
+  padding-left: var(--space-3);
+  border-left: 1px solid var(--border-subtle);
+}
+.war-band > div:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+.war-band dt {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--ink-3);
+  font-weight: var(--weight-semibold);
+}
+.war-band dd {
+  margin: 1px 0 0;
+  font-size: var(--text-sm);
+  color: var(--ink-1);
+}
+.war-estimates {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+.war-estimates li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-1);
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+.war-estimates strong {
+  color: var(--ink-1);
+  font-weight: var(--weight-medium);
+}
+
+/* Box profile: label left, value right, one hairline per row. Long labels
+   ("True shooting") are words, not uppercase abbreviations, so they fit
+   two to a row without wrapping. */
+.mini-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--space-4);
+}
+.mini-stats li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  border-top: 1px solid var(--border-subtle);
+}
+.mini-stats li:nth-child(-n + 2) {
+  border-top: 0;
+  padding-top: 0;
+}
+.mini-stats span {
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+.mini-stats strong {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+}
+.mini-stats strong .muted {
+  font-weight: var(--weight-regular);
+  font-size: var(--text-2xs);
+}
+
+/* ---------------------------------------------------------- leaderboard */
+
+.leaderboard-view {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+/* The table sits in a card. The card never lifts - at this density the row
+   is the interactive unit, so hover belongs to the row. */
+.lb-panel {
+  min-width: 0;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
+}
+
+.lb-caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-6);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.lb-count {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+.lb-count strong {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--ink-1);
+}
+.lb-count-of {
+  font-size: var(--text-sm);
+  color: var(--ink-3);
+}
+.lb-sortnote {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+}
+.lb-sortnote-key {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: var(--weight-semibold);
+  color: var(--ink-4);
+}
+.lb-sortnote-value {
+  color: var(--ink-1);
+  font-weight: var(--weight-medium);
+}
+.lb-sortnote-dir {
+  padding-left: var(--space-2);
+  border-left: 1px solid var(--border);
+  color: var(--ink-3);
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+/* Fixed layout: the declared column widths are the contract, so the money
+   columns line up and the Surplus column can never be pushed off the card by
+   a long name. The name column absorbs whatever slack is left. */
+.data-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: var(--text-sm);
+  min-width: 1010px;
+}
+.data-table th,
+.data-table td {
+  padding: var(--space-2) var(--space-2);
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Two header rows: a band naming each group of columns, then the labels.
+   The second row sticks below the first, so both survive a scroll. */
+.data-table thead th {
+  position: sticky;
+  z-index: 2;
+  background: var(--surface-raised);
+}
+.data-table thead .group-row th {
+  top: 0;
+  height: 34px;
+  padding: var(--space-4) var(--space-2) var(--space-1);
+  border-bottom: none;
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: var(--weight-semibold);
+  color: var(--ink-4);
+}
+.data-table thead tr:not(.group-row) th {
+  top: 34px;
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-strong);
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: var(--weight-semibold);
+  color: var(--ink-3);
+}
+/* Vertical hairline separating the column groups, header through body. */
+.data-table .group-row th + th,
+.data-table th.group-start,
+.data-table td.group-start {
+  border-left: 1px solid var(--border-subtle);
+}
+
+.th-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  transition: color var(--duration-fast) var(--ease-signature);
+}
+.th-button:hover,
+.th-button.is-active {
+  color: var(--ink-1);
+}
+/* One chevron. Hidden until the column is in play, rotated when ascending -
+   nothing to decode, no glyph soup. */
+.sort-icon {
+  flex: none;
+  opacity: 0;
+  transition:
+    opacity var(--duration-fast) var(--ease-signature),
+    transform var(--duration-base) var(--ease-signature);
+}
+.th-button:hover .sort-icon {
+  opacity: 0.45;
+}
+.sort-icon[data-state='asc'],
+.sort-icon[data-state='desc'] {
+  opacity: 1;
+}
+.sort-icon[data-state='asc'] {
+  transform: rotate(180deg);
+}
+
+.data-table tbody tr {
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-signature);
+}
+.data-table tbody tr:hover {
+  background: var(--surface-hover);
+}
+.data-table tbody tr.is-pinned {
+  background: var(--pos-soft);
+}
+.data-table tbody tr.is-pinned td:first-child {
+  box-shadow: inset 2px 0 0 var(--pos-mark);
+}
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.rank-cell {
+  color: var(--ink-4);
+  font-size: var(--text-xs);
+}
+.name-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+  max-width: 100%;
+}
+.name-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-tight);
+}
+/* `team` is the contract team; `stats_team` is where the production was
+   earned. When they differ the row says so in words, on its own line. */
+.team-cell {
+  display: grid;
+  gap: 0;
+  line-height: var(--leading-tight);
+}
+.team-now {
+  font-weight: var(--weight-medium);
+}
+.team-from {
+  font-size: var(--text-2xs);
+  color: var(--ink-4);
+}
+
+/* Money on the left of the cell, magnitude on the right, zero pinned to the
+   same x in every row so the extremes fall out of the column. */
+.surplus-cell {
+  display: grid;
+  grid-template-columns: 76px minmax(44px, 1fr);
+  align-items: center;
+  gap: var(--space-3);
+  font-variant-numeric: tabular-nums;
+}
+.surplus-figure {
+  text-align: right;
+  font-weight: var(--weight-semibold);
+}
+.surplus-cell.is-pos .surplus-figure {
+  color: var(--pos-ink);
+}
+.surplus-cell.is-neg .surplus-figure {
+  color: var(--neg-ink);
+}
+.surplus-track {
+  position: relative;
+  height: 10px;
+}
+.surplus-axis {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--border-strong);
+}
+.surplus-fill {
+  position: absolute;
+  top: 1px;
+  height: 8px;
+  border-radius: var(--radius-xs);
+}
+.surplus-cell.is-pos .surplus-fill {
+  background: var(--pos-mark);
+}
+.surplus-cell.is-neg .surplus-fill {
+  background: var(--neg-mark);
+}
+
+.lb-more {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--border-subtle);
+  background: var(--surface-sunken);
+}
+.lb-more-note {
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+
+/* --------------------------------------------------------- value rail */
+
+.scatter-main {
+  min-width: 0;
+}
+
+.extreme-list {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
+  transition: box-shadow var(--duration-base) var(--ease-signature);
+}
+.extreme-list:hover {
+  box-shadow: var(--shadow-lg);
+}
+.extreme-head {
+  padding: var(--space-4) var(--space-4) var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.extreme-list h3 {
+  margin-bottom: 2px;
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: var(--weight-semibold);
+  color: var(--ink-1);
+}
+.extreme-head p {
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+.extreme-list ul {
+  display: block;
+  background: none;
+  border: none;
+  border-radius: 0;
+}
+.extreme-list li + li {
+  border-top: 1px solid var(--border-subtle);
+}
+.extreme-list button {
+  display: grid;
+  grid-template-columns: 14px 34px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: none;
+  font-size: var(--text-sm);
+  transition: background-color var(--duration-fast) var(--ease-signature);
+}
+.extreme-list button:hover {
+  background: var(--surface-hover);
+}
+.ex-rank {
+  font-size: var(--text-2xs);
+  color: var(--ink-4);
+  font-variant-numeric: tabular-nums;
+}
+.ex-name {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+.ex-name-text {
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-tight);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ex-name-sub {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-size: var(--text-2xs);
+  color: var(--ink-4);
+}
+.ex-team {
+  color: var(--ink-3);
+  font-weight: var(--weight-medium);
+}
+.ex-value {
+  text-align: right;
+  white-space: nowrap;
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+.ex-value.is-pos {
+  color: var(--pos-ink);
+}
+.ex-value.is-neg {
+  color: var(--neg-ink);
+}
+
+/* ---------------------------------------------------------------- teams */
+
+.teams-view {
+  display: grid;
+  gap: var(--space-4);
+}
+.view-head {
+  display: flex;
+  gap: var(--space-6);
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+/* Two populations share this table and the legend names both before the
+   numbers start. */
+.teams-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-6);
+  font-size: var(--text-xs);
+}
+.teams-legend-item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+.teams-legend-key {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: var(--weight-semibold);
+  color: var(--ink-1);
+}
+.teams-legend-body {
+  color: var(--ink-3);
+}
+
+.team-table {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
+}
+
+.team-head,
+.team-summary {
+  display: grid;
+  grid-template-columns:
+    30px 50px minmax(132px, 0.62fr) 42px 122px
+    98px minmax(140px, 1fr) 54px 58px 20px;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+}
+
+.team-head {
+  grid-template-rows: auto auto;
+  row-gap: var(--space-2);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--border-strong);
+}
+.team-head-group {
+  grid-row: 1;
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: var(--weight-semibold);
+  color: var(--ink-4);
+}
+.team-head-group.th-roster {
+  grid-column: 3 / 6;
+}
+.team-head-group.th-rotation {
+  grid-column: 6 / 11;
+}
+.team-head .th {
+  grid-row: 2;
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: var(--weight-semibold);
+  color: var(--ink-3);
+}
+.team-head .th-payroll,
+.team-head .th-roster-n,
+.team-head .th-surplus,
+.team-head .th-war,
+.team-head .th-count {
+  text-align: right;
+}
+.team-head .th-payroll {
+  text-align: left;
+}
+/* The rule between the full-roster columns and the rotation columns. It runs
+   from the group band down through every row, because the two populations
+   are not the same players. */
+.team-head-group.th-rotation,
+.team-head .th-surplus,
+.team-value {
+  padding-left: var(--space-3);
+  border-left: 1px solid var(--border-subtle);
+}
+
+.team-rows {
+  min-width: 0;
+}
+.team-row + .team-row {
+  border-top: 1px solid var(--border-subtle);
+}
+.team-summary {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: var(--text-sm);
+  transition: background-color var(--duration-fast) var(--ease-signature);
+}
+.team-summary:hover {
+  background: var(--surface-hover);
+}
+.team-row.is-open {
+  background: var(--surface-sunken);
+}
+.team-rank {
+  text-align: right;
+  font-size: var(--text-xs);
+  color: var(--ink-4);
+  font-variant-numeric: tabular-nums;
+}
+.team-abbr {
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+}
+
+.team-payroll {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.team-payroll-value {
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-1);
+}
+.team-payroll-track {
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-wash);
+  overflow: hidden;
+}
+.team-payroll-fill {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--n-400);
+}
+.team-roster-n {
+  text-align: right;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Apron is a ladder, not a palette: the number of lit notches IS the rung,
+   and the ramp is neutral so blue/red keep meaning surplus. */
+.apron {
+  display: grid;
+  gap: 4px;
+  justify-items: start;
+  min-width: 0;
+}
+.apron-meter {
+  display: flex;
+  gap: 2px;
+}
+.apron-meter .notch {
+  width: 13px;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background: var(--n-150);
+}
+.apron[data-step='1'] .notch.is-on {
+  background: var(--n-400);
+}
+.apron[data-step='2'] .notch.is-on {
+  background: var(--n-500);
+}
+.apron[data-step='3'] .notch.is-on {
+  background: var(--n-700);
+}
+.apron[data-step='4'] .notch.is-on {
+  background: var(--n-950);
+}
+.apron-label {
+  font-size: var(--text-2xs);
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.apron[data-step='3'] .apron-label,
+.apron[data-step='4'] .apron-label {
+  color: var(--ink-1);
+  font-weight: var(--weight-semibold);
+}
+.apron-unknown {
+  font-size: var(--text-xs);
+  color: var(--ink-4);
+}
+
+.team-value {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--weight-semibold);
+}
+.team-value.is-pos {
+  color: var(--pos-ink);
+}
+.team-value.is-neg {
+  color: var(--neg-ink);
+}
+.team-bar {
+  position: relative;
+  height: 10px;
+}
+.team-bar-axis {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--border-strong);
+}
+.team-bar-fill {
+  position: absolute;
+  top: 1px;
+  height: 8px;
+  border-radius: var(--radius-xs);
+}
+.team-bar.is-pos .team-bar-fill {
+  background: var(--pos-mark);
+}
+.team-bar.is-neg .team-bar-fill {
+  background: var(--neg-mark);
+}
+.team-war,
+.team-count {
+  text-align: right;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.team-disclosure {
+  justify-self: end;
+  color: var(--ink-4);
+  transition:
+    transform var(--duration-base) var(--ease-signature),
+    color var(--duration-fast) var(--ease-signature);
+}
+.team-disclosure[data-open='true'] {
+  transform: rotate(180deg);
+  color: var(--ink-1);
+}
+
+.team-detail {
+  display: grid;
+  gap: var(--space-5);
+  padding: var(--space-2) var(--space-5) var(--space-6);
+}
+.team-facts {
+  display: grid;
+  gap: var(--space-4);
+}
+.team-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+  gap: var(--space-4);
+}
+.team-stat dt {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--ink-3);
+  font-weight: var(--weight-semibold);
+}
+.team-stat dd {
+  margin: var(--space-1) 0 0;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-tight);
+  font-variant-numeric: tabular-nums;
+}
+.team-stat dd.is-pos {
+  color: var(--pos-ink);
+}
+.team-stat p {
+  margin-top: 2px;
+  font-size: var(--text-2xs);
+  color: var(--ink-4);
+}
+.team-caveat {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-subtle);
+  max-width: 76ch;
+  font-size: var(--text-xs);
+  line-height: var(--leading-normal);
+  color: var(--ink-3);
+}
+
+.roster {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-raised);
+  overflow: hidden;
+}
+.roster-head,
+.roster-list button {
+  display: grid;
+  grid-template-columns: 30px minmax(110px, 1fr) 132px 76px 88px;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+}
+.roster-head {
+  background: var(--surface-sunken);
+  border-bottom: 1px solid var(--border);
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: var(--weight-semibold);
+  color: var(--ink-3);
+}
+.roster-list {
+  display: block;
+}
+.roster-list li + li {
+  border-top: 1px solid var(--border-subtle);
+}
+.roster-list button {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: var(--text-sm);
+  transition: background-color var(--duration-fast) var(--ease-signature);
+}
+.roster-list button:hover {
+  background: var(--surface-hover);
+}
+.roster-list .contract-chip {
+  justify-self: start;
+}
+.roster-name {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+.roster-name-text {
+  font-weight: var(--weight-medium);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.roster-name-sub {
+  display: flex;
+  gap: var(--space-2);
+  font-size: var(--text-2xs);
+  color: var(--ink-4);
+}
+.roster-pos {
+  color: var(--ink-3);
+  font-weight: var(--weight-medium);
+}
+.roster-share {
+  text-align: right;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.roster-value {
+  text-align: right;
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+.roster-value.is-pos {
+  color: var(--pos-ink);
+}
+.roster-value.is-neg {
+  color: var(--neg-ink);
+}
+.roster-empty {
+  font-size: var(--text-sm);
+  color: var(--ink-3);
+}
+
+/* --------------------------------------------------------------- player */
+
+.player-view {
+  display: grid;
+  gap: var(--space-6);
+}
+.compare-head {
+  display: flex;
+  gap: var(--space-5);
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.compare-search {
+  position: relative;
+  flex: 0 1 380px;
+}
+.compare-search input {
+  width: 100%;
+}
+.compare-status {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+.compare-slots strong {
+  color: var(--ink-1);
+  font-weight: var(--weight-semibold);
+}
+
+.search-results {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + var(--space-1));
+  left: 0;
+  right: 0;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+.search-results li + li {
+  border-top: 1px solid var(--border-subtle);
+}
+.search-results button {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) 40px auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+}
+.sr-name {
+  font-weight: var(--weight-medium);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sr-team {
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+.sr-salary {
+  text-align: right;
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------- compare
+   One grid, one row per fact. Every player sits in the same row so the eye
+   compares horizontally; the left column carries the name of the fact and
+   nothing else has to repeat it. */
+.cmp {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
+}
+.cmp-grid {
+  display: grid;
+  grid-template-columns: 176px repeat(var(--cmp-cols, 1), minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.cmp-corner {
+  display: grid;
+  align-content: end;
+  gap: 2px;
+  padding: var(--space-5);
+  border-bottom: 1px solid var(--border-strong);
+}
+.cmp-corner-key {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: var(--weight-semibold);
+  color: var(--ink-4);
+}
+.cmp-corner-value {
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+}
+
+.cmp-identity {
+  position: relative;
+  display: grid;
+  gap: var(--space-3);
+  justify-items: start;
+  align-content: start;
+  padding: var(--space-5);
+  border-left: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-strong);
+}
+.cmp-identity h3 {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+}
+.cmp-remove {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface-raised);
+  color: var(--ink-3);
+  cursor: pointer;
+  transition:
+    color var(--duration-fast) var(--ease-signature),
+    border-color var(--duration-fast) var(--ease-signature);
+}
+.cmp-remove:hover {
+  color: var(--ink-1);
+  border-color: var(--border-strong);
+}
+.cmp-facts {
+  display: flex;
+  gap: var(--space-5);
+}
+.cmp-facts dt {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: var(--weight-semibold);
+  color: var(--ink-4);
+}
+.cmp-facts dd {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+/* Production and payroll can belong to different franchises; when they do,
+   the card says which, in words. */
+.cmp-moved {
+  display: grid;
+  gap: 1px;
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-sunken);
+  border-left: 2px solid var(--border-strong);
+  border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+}
+.cmp-moved-key {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: var(--weight-semibold);
+  color: var(--ink-4);
+}
+.cmp-moved-value {
+  font-size: var(--text-xs);
+  color: var(--ink-2);
+}
+
+.cmp-band {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5) var(--space-3);
+  background: var(--surface-sunken);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.cmp-band-label {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: var(--weight-semibold);
+  color: var(--ink-1);
+}
+.cmp-band-note {
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+
+.cmp-rowhead {
+  display: grid;
+  align-content: center;
+  gap: 1px;
+  padding: var(--space-3) var(--space-5);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.cmp-key {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  color: var(--ink-2);
+}
+.cmp-note {
+  font-size: var(--text-2xs);
+  color: var(--ink-4);
+}
+
+.cmp-cell {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-5);
+  border-left: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  font-variant-numeric: tabular-nums;
+}
+.cmp-cell.is-lead {
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-4);
+}
+.cmp-val {
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+}
+.cmp-val.is-pos {
+  color: var(--pos-ink);
+}
+.cmp-val.is-neg {
+  color: var(--neg-ink);
+}
+.cmp-big {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tighter);
+  line-height: var(--leading-none);
+}
+.cmp-big.is-pos {
+  color: var(--pos-ink);
+}
+.cmp-big.is-neg {
+  color: var(--neg-ink);
+}
+/* The gap to whichever player leads the row - the comparison, stated. */
+.cmp-gap {
+  font-size: var(--text-2xs);
+  color: var(--ink-4);
+}
+/* The apron meter is the same encoding as the team table; inside a comparison
+   cell it just needs air between its notches and the sentence beneath. */
+.cmp-cell .apron {
+  margin-bottom: var(--space-1);
+}
+
+.cmp-scale {
+  position: relative;
+  width: 100%;
+  max-width: 280px;
+  height: 10px;
+  margin-top: var(--space-1);
+}
+.cmp-scale-axis {
+  position: absolute;
+  left: 50%;
+  top: -3px;
+  bottom: -3px;
+  width: 1px;
+  background: var(--ink-4);
+}
+.cmp-scale-fill {
+  position: absolute;
+  top: 1px;
+  height: 8px;
+  border-radius: var(--radius-xs);
+}
+.cmp-scale.is-pos .cmp-scale-fill {
+  background: var(--pos-mark);
+}
+.cmp-scale.is-neg .cmp-scale-fill {
+  background: var(--neg-mark);
+}
+
+.cmp-pctl-track {
+  width: 100%;
+  max-width: 280px;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-wash);
+  overflow: hidden;
+}
+.cmp-pctl-fill {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--n-300);
+  transition: width var(--duration-slow) var(--ease-signature);
+}
+.cmp-pctl-fill.is-high {
+  background: var(--pos-mark);
+}
+.cmp-pctl-label {
+  font-size: var(--text-2xs);
+  color: var(--ink-3);
+}
+
+.cmp-flag {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+.cmp-flag.is-ok {
+  color: var(--ink-1);
+}
+.cmp-flag.is-blocked {
+  color: var(--neg-ink);
+}
+
+.cmp-foot {
+  padding: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--border-subtle);
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+
+.year-strip {
+  display: flex;
+  gap: var(--space-2);
+  align-items: stretch;
+  width: 100%;
+}
+.year-strip li {
+  display: grid;
+  grid-template-rows: 44px auto auto;
+  gap: 2px;
+  justify-items: center;
+  flex: 1;
+  min-width: 0;
+}
+.year-bar-slot {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid var(--border);
+}
+.year-bar {
+  width: 100%;
+  max-width: 34px;
+  margin: 0 auto;
+  background: var(--n-300);
+  border-radius: var(--radius-xs) var(--radius-xs) 0 0;
+}
+.year-strip li.is-guaranteed .year-bar {
+  background: var(--n-500);
+}
+.year-label {
+  font-size: var(--text-2xs);
+  color: var(--ink-4);
+}
+.year-value {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-medium);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------- states */
+
+/* Three states, one shape: a card with a badge slot, a title and at most one
+   line of body. Empty is the quiet variant - dashed and sunken, because
+   nothing has gone wrong. */
+.state-screen {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: start;
+  padding: var(--space-6);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xs);
+  color: var(--ink-2);
+}
+.state-screen.is-empty {
+  background: var(--surface-sunken);
+  border-style: dashed;
+  border-color: var(--border-strong);
+  box-shadow: none;
+}
+.state-badge,
+.state-badge.error {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: var(--weight-bold);
+  color: var(--neg-ink);
+}
+.state-title {
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--ink-1);
+}
+.state-body {
+  max-width: 58ch;
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+}
+.state-screen .button {
+  margin-top: var(--space-2);
+}
+.skeleton-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-2);
+  height: 88px;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: var(--space-2);
+}
+.skeleton-chart span {
+  flex: 1;
+  background: var(--surface-wash);
+  border-radius: var(--radius-xs);
+  animation: pulse 1.6s var(--ease-signature) infinite;
+}
+.skeleton-chart span:nth-child(1) {
+  height: 42%;
+}
+.skeleton-chart span:nth-child(2) {
+  height: 74%;
+  animation-delay: 120ms;
+}
+.skeleton-chart span:nth-child(3) {
+  height: 96%;
+  animation-delay: 240ms;
+}
+.skeleton-chart span:nth-child(4) {
+  height: 58%;
+  animation-delay: 360ms;
+}
+.skeleton-chart span:nth-child(5) {
+  height: 80%;
+  animation-delay: 480ms;
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* --------------------------------------------------------------- footer */
+
+.app-footer {
+  margin-top: var(--space-16);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border);
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+
+/* ----------------------------------------------------------- responsive */
+
+@media (max-width: 1180px) {
+  .scatter-view,
+  .leaderboard-view {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .scatter-side,
+  .leaderboard-side {
+    position: static;
+  }
+  .side-stack {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+}
+
+/* The ten-column team grid wants ~860px. Between that and the stacking
+   breakpoint the numeric columns tighten rather than overflow. */
+@media (max-width: 980px) {
+  .team-head,
+  .team-summary {
+    grid-template-columns:
+      26px 44px minmax(104px, 1fr) 34px 104px
+      88px minmax(64px, 0.7fr) 44px 46px 18px;
+    gap: var(--space-2);
+    padding-inline: var(--space-4);
+  }
+  .cmp-grid {
+    grid-template-columns: 148px repeat(var(--cmp-cols, 1), minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .app-shell {
+    padding: 18px 14px 48px;
+  }
+  .brand h1 {
+    font-size: var(--step-3);
+  }
+  .header-controls {
+    width: 100%;
+    gap: var(--space-3);
+  }
+  .mode-toggle {
+    min-width: 0;
+  }
+  .chart-canvas {
+    height: 62vh;
+    min-height: 360px;
+  }
+  /* The hint is a nicety, and on a phone the legend needs the width more.
+     The readout keeps its width: it is mirrored in READOUT.width in
+     ScatterChart.jsx, which is what decides when it flips across the cursor. */
+  .legend-hint {
+    display: none;
+  }
+  /* No column headers to label them, so the summary keeps only the facts
+     that carry their own label: team, payroll, apron and surplus. Roster
+     size, WAR and rotation count move into the expanded detail, where each
+     one has a written name. */
+  .team-head {
+    display: none;
+  }
+  .team-summary {
+    grid-template-columns: 26px 1fr auto 18px;
+    row-gap: var(--space-2);
+    padding-inline: var(--space-4);
+  }
+  .team-rank {
+    grid-area: 1 / 1;
+  }
+  .team-abbr {
+    grid-area: 1 / 2;
+  }
+  .team-value {
+    grid-area: 1 / 3;
+    padding-left: 0;
+    border-left: none;
+  }
+  .team-disclosure {
+    grid-area: 1 / 4;
+  }
+  .team-payroll {
+    grid-area: 2 / 1 / 3 / 5;
+  }
+  .apron {
+    grid-area: 3 / 1 / 4 / 5;
+  }
+  .team-roster-n,
+  .team-bar,
+  .team-war,
+  .team-count {
+    display: none;
+  }
+  .roster-head,
+  .roster-list button {
+    grid-template-columns: 30px minmax(0, 1fr) 88px;
+  }
+  .roster-head > :nth-child(3),
+  .roster-list .contract-chip,
+  .roster-share {
+    display: none;
+  }
+  .stat-grid,
+  .mini-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  /* Below this width the matrix scrolls sideways rather than clipping a
+     player out of the comparison. */
+  .cmp {
+    overflow-x: auto;
+  }
+  .cmp-grid {
+    grid-template-columns: 112px repeat(var(--cmp-cols, 1), minmax(0, 1fr));
+    min-width: calc(112px + var(--cmp-cols, 1) * 186px);
+  }
+  .cmp-corner,
+  .cmp-identity,
+  .cmp-rowhead,
+  .cmp-cell,
+  .cmp-band,
+  .cmp-foot {
+    padding-inline: var(--space-3);
+  }
+  .cmp-big {
+    font-size: var(--text-xl);
+  }
+  .lb-caption,
+  .lb-more {
+    padding-inline: var(--space-4);
+  }
+  .facet-group-items {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .filter-search,
+  .filter-age {
+    max-width: none;
+    flex-basis: 100%;
+  }
+  .filter-count {
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
