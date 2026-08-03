@@ -37,18 +37,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Guard — no live stats.nba.com calls (ADR-010)
-        run: |
-          # nba_api may be imported ONLY for its offline static player table.
-          # Any endpoints import means a live stats.nba.com request, which is
-          # blocked from datacenter IPs and would break the nightly workflow.
-          if grep -rn "nba_api.stats.endpoints\|from nba_api.stats import endpoints" etl/; then
-            echo "::error::ADR-010 violation: etl/ imports nba_api endpoints (live stats.nba.com)."
-            exit 1
-          fi
-          echo "OK: nba_api usage confined to the offline static module."
-
       - name: Run unit tests
+        # Includes the ADR-010 guard (tests/test_adr010.py), which parses the
+        # AST of every etl/ module rather than grepping for the forbidden
+        # import. A text search cannot tell an import from a docstring that
+        # documents the prohibition, and fired on our own documentation.
         run: python -m pytest tests/ -q
 
   web:
