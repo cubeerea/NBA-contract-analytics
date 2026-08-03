@@ -327,7 +327,13 @@ def test_output_matches_stats_schema(stats: pd.DataFrame) -> None:
         elif kind == "float":
             assert np.issubdtype(dtype, np.floating), f"{column} is {dtype}"
         else:
-            assert dtype == object, f"{column} is {dtype}"
+            # pandas 3.0 made StringDtype the default for text columns, where
+            # 2.x used object. The schema only cares that the column holds
+            # strings, not which of the two representations pandas picked, so
+            # accept both rather than pinning the pipeline to pandas 2.
+            assert dtype == object or isinstance(
+                dtype, pd.StringDtype
+            ), f"{column} is {dtype}"
 
 
 def test_duplicate_slugs_trip_the_assertion() -> None:
