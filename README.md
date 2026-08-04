@@ -81,7 +81,7 @@ rendering requirement. Q7 set the principle: contested assumptions become featur
 
 ## Architecture decisions
 
-| ADR | Decision | Why |
+| | Decision | Why |
 |---|---|---|
 | **001** | Ingest raw BBRef and DARKO data; compute every derived metric ourselves. No EPM dependency. | EPM is paywalled and therefore non-reproducible; DARKO is free, nightly, and genuinely projective. A provider interface keeps EPM addable behind a flag. |
 | **002** | Score completed 2025-26 production against active 2026-27 salary. | Answers "who is overpaid right now", and both inputs are settled. Players with a contract but no 2025-26 production become an explicit `no_prior_season` class, excluded from the fit rather than plotted at zero. |
