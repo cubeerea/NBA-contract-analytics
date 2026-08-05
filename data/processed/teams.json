@@ -6,9 +6,9 @@
     "cap_space": -31169556.0,
     "apron_status": "over_cap",
     "rotation_salary": 186701455.0,
-    "total_war": 51.493504260762705,
-    "total_surplus_naive": 21179301.191293404,
-    "total_surplus_replacement": 72810041.73911679,
+    "total_war": 51.513014565681765,
+    "total_surplus_naive": 21254572.017134324,
+    "total_surplus_replacement": 72904130.27141793,
     "player_count": 11
   },
   {
@@ -18,9 +18,9 @@
     "cap_space": -36476932.0,
     "apron_status": "over_tax",
     "rotation_salary": 134126968.0,
-    "total_war": 39.66112841795154,
-    "total_surplus_naive": 25447163.828139126,
-    "total_surplus_replacement": 65340696.78517394,
+    "total_war": 39.67798197128592,
+    "total_surplus_naive": 25514973.072324283,
+    "total_surplus_replacement": 65425458.34040538,
     "player_count": 11
   },
   {
@@ -30,9 +30,9 @@
     "cap_space": 11797174.0,
     "apron_status": "under_cap",
     "rotation_salary": 144120539.0,
-    "total_war": 36.496641565679674,
-    "total_surplus_naive": 4581361.389244877,
-    "total_surplus_replacement": 41077939.48655613,
+    "total_war": 36.51403353046477,
+    "total_surplus_naive": 4646317.791792244,
+    "total_surplus_replacement": 41159134.98974033,
     "player_count": 12
   },
   {
@@ -42,9 +42,9 @@
     "cap_space": -43110882.0,
     "apron_status": "over_tax",
     "rotation_salary": 166706265.0,
-    "total_war": 41.208499405999724,
-    "total_surplus_naive": -906380.3533385219,
-    "total_surplus_replacement": 40543590.80832688,
+    "total_war": 41.22616891257089,
+    "total_surplus_naive": -835288.1710583698,
+    "total_surplus_replacement": 40632456.03617707,
     "player_count": 9
   },
   {
@@ -54,9 +54,9 @@
     "cap_space": -49837992.0,
     "apron_status": "first_apron",
     "rotation_salary": 193972512.0,
-    "total_war": 45.50335138738459,
-    "total_surplus_naive": -10892552.287454877,
-    "total_surplus_replacement": 34877437.64068144,
+    "total_war": 45.51723828381839,
+    "total_surplus_naive": -10836679.206415499,
+    "total_surplus_replacement": 34947278.991980664,
     "player_count": 10
   },
   {
@@ -66,9 +66,9 @@
     "cap_space": -3100447.0,
     "apron_status": "over_cap",
     "rotation_salary": 151858826.0,
-    "total_war": 32.0894561861059,
-    "total_surplus_naive": -16721106.652183238,
-    "total_surplus_replacement": 16384426.18477098,
+    "total_war": 32.108335892549896,
+    "total_surplus_naive": -16650231.491051193,
+    "total_surplus_replacement": 16473020.13618603,
     "player_count": 13
   },
   {
@@ -78,9 +78,9 @@
     "cap_space": -52987756.0,
     "apron_status": "first_apron",
     "rotation_salary": 214965076.0,
-    "total_war": 43.27926482216691,
-    "total_surplus_naive": -39158888.38556506,
-    "total_surplus_replacement": 4113761.518043708,
+    "total_war": 43.298206313531495,
+    "total_surplus_naive": -39090226.84014369,
+    "total_surplus_replacement": 4199588.449820409,
     "player_count": 12
   },
   {
@@ -90,21 +90,21 @@
     "cap_space": -36371759.0,
     "apron_status": "over_tax",
     "rotation_salary": 158438811.0,
-    "total_war": 28.811817488583156,
-    "total_surplus_naive": -36893237.469791174,
-    "total_surplus_replacement": -7185741.087238943,
+    "total_war": 28.827060711130503,
+    "total_surplus_naive": -36837632.705807604,
+    "total_surplus_replacement": -7116235.132259484,
     "player_count": 10
   },
   {
     "team": "MEM",
-    "total_salary": 167772446.0,
-    "roster_count": 22,
-    "cap_space": -2811446.0,
+    "total_salary": 171519206.0,
+    "roster_count": 23,
+    "cap_space": -6558206.0,
     "apron_status": "over_cap",
     "rotation_salary": 90416494.0,
-    "total_war": 14.304780196939433,
-    "total_surplus_naive": -27045618.626566,
-    "total_surplus_replacement": -11881796.783207484,
+    "total_war": 14.319811585473389,
+    "total_surplus_naive": -26997889.757339116,
+    "total_surplus_replacement": -11822135.696673889,
     "player_count": 11
   },
   {
@@ -114,9 +114,9 @@
     "cap_space": -42034023.0,
     "apron_status": "over_tax",
     "rotation_salary": 199997903.0,
-    "total_war": 37.07998917150616,
-    "total_surplus_naive": -50808827.54339442,
-    "total_surplus_replacement": -13511558.679242987,
+    "total_war": 37.09875315381321,
+    "total_surplus_naive": -50733331.80472727,
+    "total_surplus_replacement": -13417189.005909074,
     "player_count": 12
   },
   {
@@ -126,21 +126,21 @@
     "cap_space": -31450233.0,
     "apron_status": "over_cap",
     "rotation_salary": 180335554.0,
-    "total_war": 32.02843712404801,
-    "total_surplus_naive": -49977187.71142578,
-    "total_surplus_replacement": -17727044.63928221,
+    "total_war": 32.04657443073209,
+    "total_surplus_naive": -49906868.91360071,
+    "total_surplus_replacement": -17639146.142000876,
     "player_count": 12
   },
   {
     "team": "CLE",
-    "total_salary": 226017942.0,
-    "roster_count": 15,
-    "cap_space": -61056942.0,
+    "total_salary": 228467363.0,
+    "roster_count": 16,
+    "cap_space": -63506363.0,
     "apron_status": "second_apron",
     "rotation_salary": 207574671.0,
-    "total_war": 36.78976890990621,
-    "total_surplus_naive": -57836347.54460447,
-    "total_surplus_replacement": -21080663.680755552,
+    "total_war": 36.80610072391129,
+    "total_surplus_naive": -57779484.05796188,
+    "total_surplus_replacement": -21009584.322452325,
     "player_count": 11
   },
   {
@@ -150,21 +150,21 @@
     "cap_space": -50910829.0,
     "apron_status": "first_apron",
     "rotation_salary": 207653445.0,
-    "total_war": 36.2622828121688,
-    "total_surplus_naive": -60785195.02245345,
-    "total_surplus_replacement": -24407581.028066777,
+    "total_war": 36.278696025354954,
+    "total_surplus_naive": -60721280.32141698,
+    "total_surplus_replacement": -24327687.65177121,
     "player_count": 10
   },
   {
     "team": "DEN",
-    "total_salary": 217593192.0,
+    "total_salary": 217739533.0,
     "roster_count": 13,
-    "cap_space": -52632192.0,
+    "cap_space": -52778533.0,
     "apron_status": "first_apron",
-    "rotation_salary": 212863309.0,
-    "total_war": 36.84269078292665,
-    "total_surplus_naive": -61176620.5576528,
-    "total_surplus_replacement": -24430722.25558473,
+    "rotation_salary": 213009650.0,
+    "total_war": 36.857263197764915,
+    "total_surplus_naive": -61277245.066344686,
+    "total_surplus_replacement": -24515670.932165075,
     "player_count": 11
   },
   {
@@ -174,9 +174,9 @@
     "cap_space": -33059399.0,
     "apron_status": "over_cap",
     "rotation_salary": 188005595.0,
-    "total_war": 31.951394420894555,
-    "total_surplus_naive": -57115321.759253606,
-    "total_surplus_replacement": -25071650.44906698,
+    "total_war": 31.968458827529307,
+    "total_surplus_naive": -57052914.36873672,
+    "total_surplus_replacement": -24993641.21092088,
     "player_count": 11
   },
   {
@@ -186,21 +186,21 @@
     "cap_space": -11988057.0,
     "apron_status": "over_cap",
     "rotation_salary": 152618819.0,
-    "total_war": 24.927666806084353,
-    "total_surplus_naive": -52036566.841137454,
-    "total_surplus_replacement": -27230452.30142179,
+    "total_war": 24.94281882232038,
+    "total_surplus_naive": -51980934.4562805,
+    "total_surplus_replacement": -27160911.82035061,
     "player_count": 10
   },
   {
     "team": "POR",
-    "total_salary": 192061727.0,
-    "roster_count": 16,
-    "cap_space": -27100727.0,
+    "total_salary": 194511148.0,
+    "roster_count": 17,
+    "cap_space": -29550148.0,
     "apron_status": "over_cap",
     "rotation_salary": 171301954.0,
-    "total_war": 28.108792542052484,
-    "total_surplus_naive": -57781937.922787346,
-    "total_surplus_replacement": -29741382.403484166,
+    "total_war": 28.124596732450126,
+    "total_surplus_naive": -57724013.00543859,
+    "total_surplus_replacement": -29668976.25679823,
     "player_count": 11
   },
   {
@@ -210,9 +210,9 @@
     "cap_space": -56317253.0,
     "apron_status": "first_apron",
     "rotation_salary": 209118450.0,
-    "total_war": 33.35699242953085,
-    "total_surplus_naive": -70805240.58764993,
-    "total_surplus_replacement": -36905835.23456239,
+    "total_war": 33.37980773734411,
+    "total_surplus_naive": -70720827.2527152,
+    "total_surplus_replacement": -36800318.56589396,
     "player_count": 15
   },
   {
@@ -222,9 +222,9 @@
     "cap_space": 3415920.0,
     "apron_status": "under_cap",
     "rotation_salary": 131901997.0,
-    "total_war": 14.13837785536021,
-    "total_surplus_naive": -58546890.715715304,
-    "total_surplus_replacement": -41226459.64464413,
+    "total_war": 14.153403359616016,
+    "total_surplus_naive": -58502768.34338603,
+    "total_surplus_replacement": -41171306.67923252,
     "player_count": 10
   },
   {
@@ -234,21 +234,21 @@
     "cap_space": -6287468.0,
     "apron_status": "over_cap",
     "rotation_salary": 154898473.0,
-    "total_war": 18.39197465306665,
-    "total_surplus_naive": -67262219.327886,
-    "total_surplus_replacement": -46606359.41112788,
+    "total_war": 18.412680447163176,
+    "total_surplus_naive": -67198714.9941114,
+    "total_surplus_replacement": -46523343.88967888,
     "player_count": 14
   },
   {
     "team": "BRK",
-    "total_salary": 150836846.0,
-    "roster_count": 15,
-    "cap_space": 14124154.0,
+    "total_salary": 160105139.0,
+    "roster_count": 16,
+    "cap_space": 4855861.0,
     "apron_status": "under_cap",
     "rotation_salary": 139080326.0,
-    "total_war": 9.866557046075988,
-    "total_surplus_naive": -66412839.728757665,
-    "total_surplus_replacement": -50282659.160947084,
+    "total_war": 9.883282126004094,
+    "total_surplus_naive": -66377015.45596412,
+    "total_surplus_replacement": -50237878.819955155,
     "player_count": 12
   },
   {
@@ -258,9 +258,9 @@
     "cap_space": -33925535.0,
     "apron_status": "over_cap",
     "rotation_salary": 195377855.0,
-    "total_war": 27.741050785317718,
-    "total_surplus_naive": -81283747.83762085,
-    "total_surplus_replacement": -53099669.54702605,
+    "total_war": 27.756922644914088,
+    "total_surplus_naive": -81223076.61628881,
+    "total_surplus_replacement": -53023830.52036099,
     "player_count": 10
   },
   {
@@ -270,9 +270,9 @@
     "cap_space": -53164071.0,
     "apron_status": "first_apron",
     "rotation_salary": 215540532.0,
-    "total_war": 31.88284660166423,
-    "total_surplus_naive": -86628918.91937448,
-    "total_surplus_replacement": -54740464.1492181,
+    "total_war": 31.9019410842607,
+    "total_surplus_naive": -86554409.64047146,
+    "total_surplus_replacement": -54647327.55058929,
     "player_count": 13
   },
   {
@@ -282,9 +282,9 @@
     "cap_space": -32204966.0,
     "apron_status": "over_cap",
     "rotation_salary": 155429318.0,
-    "total_war": 16.909196107052317,
-    "total_surplus_naive": -74287021.30513115,
-    "total_surplus_replacement": -55359241.13141392,
+    "total_war": 16.926631223210503,
+    "total_surplus_naive": -74235220.32999802,
+    "total_surplus_replacement": -55294489.912497506,
     "player_count": 12
   },
   {
@@ -294,9 +294,9 @@
     "cap_space": -31902734.0,
     "apron_status": "over_cap",
     "rotation_salary": 129788402.0,
-    "total_war": 13.574763284327943,
-    "total_surplus_naive": -74489316.89392397,
-    "total_surplus_replacement": -61213804.264778405,
+    "total_war": 13.589755444340897,
+    "total_surplus_naive": -74438305.08660212,
+    "total_surplus_replacement": -61142626.260498784,
     "player_count": 10
   },
   {
@@ -306,9 +306,9 @@
     "cap_space": -38754395.0,
     "apron_status": "over_tax",
     "rotation_salary": 137341350.0,
-    "total_war": 13.890795467894081,
-    "total_surplus_naive": -76256458.99383983,
-    "total_surplus_replacement": -62343030.24229978,
+    "total_war": 13.905374747723517,
+    "total_surplus_naive": -76218795.96004596,
+    "total_surplus_replacement": -62295951.45005745,
     "player_count": 10
   },
   {
@@ -318,9 +318,9 @@
     "cap_space": -14404019.0,
     "apron_status": "over_cap",
     "rotation_salary": 160433879.0,
-    "total_war": 15.424283187692447,
-    "total_surplus_naive": -81663193.54888101,
-    "total_surplus_replacement": -62988867.68610125,
+    "total_war": 15.443208006935592,
+    "total_surplus_naive": -81607316.52200255,
+    "total_surplus_replacement": -62919021.40250318,
     "player_count": 13
   },
   {
@@ -330,22 +330,22 @@
     "cap_space": -21510414.0,
     "apron_status": "over_cap",
     "rotation_salary": 116776804.0,
-    "total_war": 3.0072403734882576,
-    "total_surplus_naive": -75418914.25436766,
-    "total_surplus_replacement": -66547302.399069354,
+    "total_war": 3.0218637854038173,
+    "total_surplus_naive": -75392646.80376884,
+    "total_surplus_replacement": -66507227.47115224,
     "player_count": 10
   },
   {
     "team": "GSW",
-    "total_salary": 210390143.0,
-    "roster_count": 12,
-    "cap_space": -45429143.0,
+    "total_salary": 214864785.0,
+    "roster_count": 13,
+    "cap_space": -49903785.0,
     "apron_status": "first_apron",
-    "rotation_salary": 201844482.0,
-    "total_war": 24.141285925897286,
-    "total_surplus_naive": -104713490.10678189,
-    "total_surplus_replacement": -80430742.13347736,
-    "player_count": 10
+    "rotation_salary": 206319124.0,
+    "total_war": 26.624065733658394,
+    "total_surplus_naive": -99198818.93926775,
+    "total_surplus_replacement": -72418742.67408466,
+    "player_count": 11
   },
   {
     "team": "SAC",
@@ -354,9 +354,9 @@
     "cap_space": -24385486.0,
     "apron_status": "over_cap",
     "rotation_salary": 131546803.0,
-    "total_war": 1.3651699814711464,
-    "total_surplus_naive": -112609654.93938434,
-    "total_surplus_replacement": -109233161.92423041,
+    "total_war": 1.375949979041788,
+    "total_surplus_naive": -112584807.99084583,
+    "total_surplus_replacement": -109202103.23855728,
     "player_count": 8
   }
 ]
