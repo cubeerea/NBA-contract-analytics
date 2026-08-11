@@ -1,9 +1,9 @@
 [
   {
     "team": "SAS",
-    "total_salary": 196130556.0,
-    "roster_count": 17,
-    "cap_space": -31169556.0,
+    "total_salary": 198315672.0,
+    "roster_count": 18,
+    "cap_space": -33354672.0,
     "apron_status": "over_cap",
     "rotation_salary": 186701455.0,
     "total_war": 51.493776822731355,
@@ -14,7 +14,7 @@
   {
     "team": "BOS",
     "total_salary": 201437932.0,
-    "roster_count": 18,
+    "roster_count": 19,
     "cap_space": -36476932.0,
     "apron_status": "over_tax",
     "rotation_salary": 134126968.0,
@@ -182,7 +182,7 @@
   {
     "team": "LAC",
     "total_salary": 176949057.0,
-    "roster_count": 17,
+    "roster_count": 18,
     "cap_space": -11988057.0,
     "apron_status": "over_cap",
     "rotation_salary": 152618819.0,

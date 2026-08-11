@@ -5924,14 +5924,14 @@
     "expected_salary_floored_naive": false,
     "expected_salary_floored_replacement": false,
     "cap_pct_residual": 0.0278082124,
-    "contract_type": "free_agent",
+    "contract_type": "extension",
     "salary_tier": "standard",
     "is_market_priced": true,
-    "guaranteed_remaining": 19992727.0,
+    "guaranteed_remaining": 92992726.0,
     "years_remaining": 0.0,
     "no_trade_clause": null,
     "trade_eligible": true,
-    "trade_restriction_reason": ""
+    "trade_restriction_reason": "Possible Jan 15 re-signing restriction \u2014 depends on Bird rights and cap position at signing (not modeled)"
   },
   {
     "bbref_slug": "schrode01",
