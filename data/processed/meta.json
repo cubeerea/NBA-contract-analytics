@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-12T11:43:30.191036+00:00",
+  "generated_at": "2026-08-13T11:43:54.210005+00:00",
   "stats_season": "2025-26",
   "salary_season": "2026-27",
   "salary_cap": 164961000,
@@ -88,5 +88,5 @@
   },
   "min_minutes": 500,
   "player_count": 336,
-  "excluded_count": 62
+  "excluded_count": 63
 }
