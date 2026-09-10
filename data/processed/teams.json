@@ -96,15 +96,15 @@
     "player_count": 10
   },
   {
-    "team": "MEM",
-    "total_salary": 149897706.0,
-    "roster_count": 22,
-    "cap_space": 15063294.0,
-    "apron_status": "under_cap",
-    "rotation_salary": 90416494.0,
-    "total_war": 14.248353555316218,
-    "total_surplus_naive": -27224789.02009703,
-    "total_surplus_replacement": -12105759.775121272,
+    "team": "CLE",
+    "total_salary": 208969955.0,
+    "roster_count": 17,
+    "cap_space": -44008955.0,
+    "apron_status": "over_tax",
+    "rotation_salary": 201560899.0,
+    "total_war": 37.92935541883665,
+    "total_surplus_naive": -48127159.04729811,
+    "total_surplus_replacement": -10108172.55912261,
     "player_count": 11
   },
   {
@@ -120,6 +120,18 @@
     "player_count": 12
   },
   {
+    "team": "ATL",
+    "total_salary": 196978253.0,
+    "roster_count": 18,
+    "cap_space": -32017253.0,
+    "apron_status": "over_cap",
+    "rotation_salary": 184818450.0,
+    "total_war": 32.93588069937365,
+    "total_surplus_naive": -48171844.01738028,
+    "total_surplus_replacement": -14689089.521725321,
+    "player_count": 14
+  },
+  {
     "team": "PHO",
     "total_salary": 196842496.0,
     "roster_count": 19,
@@ -132,28 +144,16 @@
     "player_count": 12
   },
   {
-    "team": "MIN",
-    "total_salary": 209263417.0,
-    "roster_count": 15,
-    "cap_space": -44302417.0,
-    "apron_status": "first_apron",
-    "rotation_salary": 198990033.0,
-    "total_war": 33.09616198859653,
-    "total_surplus_naive": -55817286.95886109,
-    "total_surplus_replacement": -20702997.44857635,
-    "player_count": 10
-  },
-  {
-    "team": "CLE",
-    "total_salary": 220639643.0,
-    "roster_count": 17,
-    "cap_space": -55678643.0,
-    "apron_status": "first_apron",
-    "rotation_salary": 213230587.0,
-    "total_war": 37.92935541883665,
-    "total_surplus_naive": -59796847.04729811,
-    "total_surplus_replacement": -21777860.559122615,
-    "player_count": 11
+    "team": "MEM",
+    "total_salary": 155833398.0,
+    "roster_count": 22,
+    "cap_space": 9127602.0,
+    "apron_status": "under_cap",
+    "rotation_salary": 99589306.0,
+    "total_war": 12.649268941335459,
+    "total_surplus_naive": -33682013.02009703,
+    "total_surplus_replacement": -18562983.77512127,
+    "player_count": 13
   },
   {
     "team": "DEN",
@@ -166,6 +166,18 @@
     "total_surplus_naive": -60446166.64391689,
     "total_surplus_replacement": -23759114.17360314,
     "player_count": 10
+  },
+  {
+    "team": "MIN",
+    "total_salary": 215327417.0,
+    "roster_count": 16,
+    "cap_space": -50366417.0,
+    "apron_status": "first_apron",
+    "rotation_salary": 205054033.0,
+    "total_war": 33.431626860874005,
+    "total_surplus_naive": -60523492.95886109,
+    "total_surplus_replacement": -25079844.375534754,
+    "player_count": 11
   },
   {
     "team": "TOR",
@@ -204,18 +216,6 @@
     "player_count": 11
   },
   {
-    "team": "ATL",
-    "total_salary": 221278253.0,
-    "roster_count": 19,
-    "cap_space": -56317253.0,
-    "apron_status": "first_apron",
-    "rotation_salary": 209118450.0,
-    "total_war": 33.27134557165112,
-    "total_surplus_naive": -71114050.01738027,
-    "total_surplus_replacement": -37301936.44868373,
-    "player_count": 15
-  },
-  {
     "team": "CHI",
     "total_salary": 161545080.0,
     "roster_count": 16,
@@ -252,9 +252,21 @@
     "player_count": 14
   },
   {
+    "team": "NOP",
+    "total_salary": 200121183.0,
+    "roster_count": 20,
+    "cap_space": -35160183.0,
+    "apron_status": "over_cap",
+    "rotation_salary": 148705927.0,
+    "total_war": 18.85788494801916,
+    "total_surplus_naive": -68803729.50774977,
+    "total_surplus_replacement": -49507077.13468719,
+    "player_count": 11
+  },
+  {
     "team": "BRK",
     "total_salary": 160105139.0,
-    "roster_count": 16,
+    "roster_count": 17,
     "cap_space": 4855861.0,
     "apron_status": "under_cap",
     "rotation_salary": 139080326.0,
@@ -273,18 +285,6 @@
     "total_war": 31.811167426848282,
     "total_surplus_naive": -86908620.84902449,
     "total_surplus_replacement": -55090091.56128059,
-    "player_count": 13
-  },
-  {
-    "team": "NOP",
-    "total_salary": 202241014.0,
-    "roster_count": 20,
-    "cap_space": -37280014.0,
-    "apron_status": "over_tax",
-    "rotation_salary": 157878739.0,
-    "total_war": 17.2588003340384,
-    "total_surplus_naive": -75260953.50774977,
-    "total_surplus_replacement": -55964301.13468719,
     "player_count": 13
   },
   {
