@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T14:45:48.638768+00:00",
+  "generated_at": "2026-09-11T14:48:18.269919+00:00",
   "stats_season": "2025-26",
   "salary_season": "2026-27",
   "salary_cap": 164961000,
@@ -10,30 +10,30 @@
   "default_dollars_per_win": "replacement",
   "regression": {
     "naive": {
-      "slope": 0.002053317375349462,
-      "intercept": 0.016353599232793573,
-      "r2": 0.24309993311998757,
+      "slope": 0.002051323501514891,
+      "intercept": 0.01649606849739974,
+      "r2": 0.242952844745714,
       "n": 189
     },
     "replacement": {
-      "slope": 0.002053317375349462,
-      "intercept": 0.016353599232793573,
-      "r2": 0.24309993311998757,
+      "slope": 0.002051323501514891,
+      "intercept": 0.01649606849739974,
+      "r2": 0.242952844745714,
       "n": 189
     }
   },
   "model_line": {
     "naive": {
-      "slope": 0.00232913865135748,
-      "intercept": -0.05743577036808208,
-      "r2": 0.794111998433299,
-      "n": 338
+      "slope": 0.002328446157833215,
+      "intercept": -0.05736146283975471,
+      "r2": 0.7941534435503487,
+      "n": 339
     },
     "replacement": {
-      "slope": 0.0029114233141968506,
-      "intercept": -0.07179471296010259,
-      "r2": 0.7941119984332992,
-      "n": 338
+      "slope": 0.00291055769729152,
+      "intercept": -0.07170182854969342,
+      "r2": 0.7941534435503488,
+      "n": 339
     }
   },
   "regression_denominator_dependent": false,
@@ -47,10 +47,10 @@
   },
   "composite_fit": {
     "ts_fit": {
-      "slope": -0.00032897523686418285,
-      "intercept": 0.5884969439578982,
-      "r2": 0.0013337899633470984,
-      "n": 338
+      "slope": -0.0003249543627017985,
+      "intercept": 0.5884566515472328,
+      "r2": 0.0013024757325547087,
+      "n": 339
     },
     "weights_requested": {
       "war_blended": 0.4,
@@ -68,25 +68,25 @@
     },
     "dropped_components": [],
     "availability_formula": "min(minutes, games * 36) / (82 * 36), clipped to [0, 1]",
-    "scored_players": 338
+    "scored_players": 339
   },
   "war_constants": {
     "vorp_to_wins": 2.7,
     "league_pace": 99.0,
     "points_per_win": 32.0,
-    "replacement_ws48": 0.029892006962785565,
-    "replacement_dpm": -2.2781597132605356,
-    "n_players": 338,
-    "n_with_vorp": 338,
-    "n_with_ws": 338,
-    "n_with_darko": 338,
-    "league_total_war_vorp": 822.69,
-    "league_total_war_ws": 822.6900000000002,
-    "league_total_war_darko": 822.6899999999999,
-    "anchor_total_on_ws_support": 822.69,
-    "anchor_total_on_darko_support": 822.69
+    "replacement_ws48": 0.029996928824048634,
+    "replacement_dpm": -2.2839086991541717,
+    "n_players": 339,
+    "n_with_vorp": 339,
+    "n_with_ws": 339,
+    "n_with_darko": 339,
+    "league_total_war_vorp": 825.6600000000001,
+    "league_total_war_ws": 825.6600000000003,
+    "league_total_war_darko": 825.6600000000002,
+    "anchor_total_on_ws_support": 825.6600000000001,
+    "anchor_total_on_darko_support": 825.6600000000001
   },
   "min_minutes": 500,
-  "player_count": 338,
-  "excluded_count": 66
+  "player_count": 339,
+  "excluded_count": 67
 }
