@@ -72,6 +72,18 @@
     "player_count": 13
   },
   {
+    "team": "TOR",
+    "total_salary": 205911530.0,
+    "roster_count": 19,
+    "cap_space": -40950530.0,
+    "apron_status": "over_tax",
+    "rotation_salary": 191174084.0,
+    "total_war": 38.81699957709689,
+    "total_surplus_naive": -34134582.02869453,
+    "total_surplus_replacement": 4785844.964131872,
+    "player_count": 10
+  },
+  {
     "team": "NYK",
     "total_salary": 217948756.0,
     "roster_count": 13,
@@ -180,30 +192,6 @@
     "player_count": 11
   },
   {
-    "team": "TOR",
-    "total_salary": 202743041.0,
-    "roster_count": 20,
-    "cap_space": -37782041.0,
-    "apron_status": "over_tax",
-    "rotation_salary": 188005595.0,
-    "total_war": 31.878218442977168,
-    "total_surplus_naive": -57382938.55531882,
-    "total_surplus_replacement": -25406171.444148492,
-    "player_count": 11
-  },
-  {
-    "team": "LAC",
-    "total_salary": 196862414.0,
-    "roster_count": 21,
-    "cap_space": -31901414.0,
-    "apron_status": "over_cap",
-    "rotation_salary": 152618819.0,
-    "total_war": 24.86269158431288,
-    "total_surplus_naive": -52275130.90333544,
-    "total_surplus_replacement": -27528657.37916927,
-    "player_count": 10
-  },
-  {
     "team": "POR",
     "total_salary": 194511148.0,
     "roster_count": 17,
@@ -278,7 +266,7 @@
   {
     "team": "NOP",
     "total_salary": 204259028.0,
-    "roster_count": 21,
+    "roster_count": 22,
     "cap_space": -39298028.0,
     "apron_status": "over_tax",
     "rotation_salary": 156510805.0,
@@ -286,6 +274,18 @@
     "total_surplus_naive": -75036718.93400767,
     "total_surplus_replacement": -55347094.41750956,
     "player_count": 12
+  },
+  {
+    "team": "LAC",
+    "total_salary": 193693925.0,
+    "roster_count": 22,
+    "cap_space": -28732925.0,
+    "apron_status": "over_cap",
+    "rotation_salary": 149450330.0,
+    "total_war": 17.92391045019317,
+    "total_surplus_naive": -75523487.42995973,
+    "total_surplus_replacement": -57720673.78744963,
+    "player_count": 11
   },
   {
     "team": "MIA",
