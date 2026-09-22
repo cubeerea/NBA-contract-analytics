@@ -2106,13 +2106,13 @@
     "expected_salary_floored_naive": false,
     "expected_salary_floored_replacement": false,
     "cap_pct_residual": -0.1081907264,
-    "contract_type": "free_agent",
+    "contract_type": "extension",
     "salary_tier": "mle",
     "is_market_priced": true,
-    "guaranteed_remaining": 6440678.0,
+    "guaranteed_remaining": 61940678.0,
     "no_trade_clause": null,
     "trade_eligible": true,
-    "trade_restriction_reason": ""
+    "trade_restriction_reason": "Possible Jan 15 re-signing restriction \u2014 depends on Bird rights and cap position at signing (not modeled)"
   },
   {
     "bbref_slug": "chrisma02",
@@ -5121,13 +5121,13 @@
     "expected_salary_floored_naive": false,
     "expected_salary_floored_replacement": false,
     "cap_pct_residual": -0.0810446381,
-    "contract_type": "rookie_scale",
+    "contract_type": "extension",
     "salary_tier": "rookie_scale",
     "is_market_priced": false,
-    "guaranteed_remaining": 6563925.0,
+    "guaranteed_remaining": 162012383.0,
     "no_trade_clause": null,
     "trade_eligible": true,
-    "trade_restriction_reason": ""
+    "trade_restriction_reason": "Possible Jan 15 re-signing restriction \u2014 depends on Bird rights and cap position at signing (not modeled)"
   },
   {
     "bbref_slug": "clownno01",
