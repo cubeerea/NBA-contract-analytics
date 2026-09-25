@@ -1,9 +1,9 @@
 [
   {
     "team": "SAS",
-    "total_salary": 199673435.0,
-    "roster_count": 19,
-    "cap_space": -34712435.0,
+    "total_salary": 198315672.0,
+    "roster_count": 20,
+    "cap_space": -33354672.0,
     "apron_status": "over_cap",
     "rotation_salary": 186701455.0,
     "total_war": 51.28615469699266,
@@ -14,7 +14,7 @@
   {
     "team": "BOS",
     "total_salary": 203887353.0,
-    "roster_count": 20,
+    "roster_count": 19,
     "cap_space": -38926353.0,
     "apron_status": "over_tax",
     "rotation_salary": 136576389.0,
@@ -26,7 +26,7 @@
   {
     "team": "DET",
     "total_salary": 153163826.0,
-    "roster_count": 17,
+    "roster_count": 18,
     "cap_space": 11797174.0,
     "apron_status": "under_cap",
     "rotation_salary": 144120539.0,
@@ -158,7 +158,7 @@
   {
     "team": "PHO",
     "total_salary": 196842496.0,
-    "roster_count": 19,
+    "roster_count": 21,
     "cap_space": -31881496.0,
     "apron_status": "over_cap",
     "rotation_salary": 180335554.0,
@@ -194,7 +194,7 @@
   {
     "team": "POR",
     "total_salary": 194511148.0,
-    "roster_count": 17,
+    "roster_count": 18,
     "cap_space": -29550148.0,
     "apron_status": "over_cap",
     "rotation_salary": 171301954.0,
@@ -206,7 +206,7 @@
   {
     "team": "CHI",
     "total_salary": 161545080.0,
-    "roster_count": 16,
+    "roster_count": 17,
     "cap_space": 3415920.0,
     "apron_status": "under_cap",
     "rotation_salary": 131901997.0,
@@ -302,7 +302,7 @@
   {
     "team": "IND",
     "total_salary": 206430921.0,
-    "roster_count": 19,
+    "roster_count": 20,
     "cap_space": -41469921.0,
     "apron_status": "over_tax",
     "rotation_salary": 137341350.0,
@@ -314,7 +314,7 @@
   {
     "team": "GSW",
     "total_salary": 224664269.0,
-    "roster_count": 18,
+    "roster_count": 19,
     "cap_space": -59703269.0,
     "apron_status": "second_apron",
     "rotation_salary": 210126308.0,
