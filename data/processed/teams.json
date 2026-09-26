@@ -2,7 +2,7 @@
   {
     "team": "SAS",
     "total_salary": 198315672.0,
-    "roster_count": 20,
+    "roster_count": 19,
     "cap_space": -33354672.0,
     "apron_status": "over_cap",
     "rotation_salary": 186701455.0,
@@ -26,7 +26,7 @@
   {
     "team": "DET",
     "total_salary": 153163826.0,
-    "roster_count": 18,
+    "roster_count": 17,
     "cap_space": 11797174.0,
     "apron_status": "under_cap",
     "rotation_salary": 144120539.0,
@@ -194,7 +194,7 @@
   {
     "team": "POR",
     "total_salary": 194511148.0,
-    "roster_count": 18,
+    "roster_count": 17,
     "cap_space": -29550148.0,
     "apron_status": "over_cap",
     "rotation_salary": 171301954.0,
@@ -242,7 +242,7 @@
   {
     "team": "BRK",
     "total_salary": 161462902.0,
-    "roster_count": 18,
+    "roster_count": 20,
     "cap_space": 3498098.0,
     "apron_status": "under_cap",
     "rotation_salary": 139080326.0,
