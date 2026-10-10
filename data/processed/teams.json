@@ -278,7 +278,7 @@
   {
     "team": "LAC",
     "total_salary": 191543008.0,
-    "roster_count": 21,
+    "roster_count": 22,
     "cap_space": -26582008.0,
     "apron_status": "over_cap",
     "rotation_salary": 149450330.0,
@@ -289,9 +289,9 @@
   },
   {
     "team": "MIA",
-    "total_salary": 210478835.0,
-    "roster_count": 22,
-    "cap_space": -45517835.0,
+    "total_salary": 209121072.0,
+    "roster_count": 20,
+    "cap_space": -44160072.0,
     "apron_status": "first_apron",
     "rotation_salary": 203427276.0,
     "total_war": 27.61358795045707,
