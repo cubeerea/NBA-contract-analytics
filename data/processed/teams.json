@@ -98,7 +98,7 @@
   {
     "team": "LAL",
     "total_salary": 201332759.0,
-    "roster_count": 22,
+    "roster_count": 23,
     "cap_space": -36371759.0,
     "apron_status": "over_tax",
     "rotation_salary": 158438811.0,
@@ -110,7 +110,7 @@
   {
     "team": "CLE",
     "total_salary": 207150518.0,
-    "roster_count": 20,
+    "roster_count": 22,
     "cap_space": -42189518.0,
     "apron_status": "over_tax",
     "rotation_salary": 201560899.0,
@@ -242,7 +242,7 @@
   {
     "team": "BRK",
     "total_salary": 160105139.0,
-    "roster_count": 19,
+    "roster_count": 20,
     "cap_space": 4855861.0,
     "apron_status": "under_cap",
     "rotation_salary": 139080326.0,
@@ -265,9 +265,9 @@
   },
   {
     "team": "NOP",
-    "total_salary": 204259028.0,
+    "total_salary": 201633401.0,
     "roster_count": 22,
-    "cap_space": -39298028.0,
+    "cap_space": -36672401.0,
     "apron_status": "over_tax",
     "rotation_salary": 156510805.0,
     "total_war": 19.307845784351734,
@@ -290,7 +290,7 @@
   {
     "team": "MIA",
     "total_salary": 209121072.0,
-    "roster_count": 20,
+    "roster_count": 23,
     "cap_space": -44160072.0,
     "apron_status": "first_apron",
     "rotation_salary": 203427276.0,
@@ -314,7 +314,7 @@
   {
     "team": "GSW",
     "total_salary": 223306506.0,
-    "roster_count": 19,
+    "roster_count": 18,
     "cap_space": -58345506.0,
     "apron_status": "second_apron",
     "rotation_salary": 210126308.0,
@@ -326,7 +326,7 @@
   {
     "team": "UTA",
     "total_salary": 181863431.0,
-    "roster_count": 19,
+    "roster_count": 20,
     "cap_space": -16902431.0,
     "apron_status": "over_cap",
     "rotation_salary": 162932291.0,
@@ -338,7 +338,7 @@
   {
     "team": "WAS",
     "total_salary": 191462525.0,
-    "roster_count": 21,
+    "roster_count": 20,
     "cap_space": -26501525.0,
     "apron_status": "over_cap",
     "rotation_salary": 127226225.0,

@@ -1476,13 +1476,13 @@
     "expected_salary_floored_naive": false,
     "expected_salary_floored_replacement": false,
     "cap_pct_residual": -0.1266319561,
-    "contract_type": "rookie_scale",
+    "contract_type": "extension",
     "salary_tier": "rookie_scale",
     "is_market_priced": false,
-    "guaranteed_remaining": 5679459.0,
+    "guaranteed_remaining": 90644976.0,
     "no_trade_clause": null,
     "trade_eligible": true,
-    "trade_restriction_reason": ""
+    "trade_restriction_reason": "Possible Jan 15 re-signing restriction \u2014 depends on Bird rights and cap position at signing (not modeled)"
   },
   {
     "bbref_slug": "townska01",
