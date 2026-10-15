@@ -2,7 +2,7 @@
   {
     "team": "SAS",
     "total_salary": 198315672.0,
-    "roster_count": 21,
+    "roster_count": 20,
     "cap_space": -33354672.0,
     "apron_status": "over_cap",
     "rotation_salary": 186701455.0,
@@ -134,7 +134,7 @@
   {
     "team": "MEM",
     "total_salary": 136311503.0,
-    "roster_count": 23,
+    "roster_count": 24,
     "cap_space": 28649497.0,
     "apron_status": "under_cap",
     "rotation_salary": 92567411.0,
@@ -158,7 +158,7 @@
   {
     "team": "ATL",
     "total_salary": 193345720.0,
-    "roster_count": 21,
+    "roster_count": 20,
     "cap_space": -28384720.0,
     "apron_status": "over_cap",
     "rotation_salary": 181185917.0,
@@ -278,7 +278,7 @@
   {
     "team": "LAC",
     "total_salary": 189093587.0,
-    "roster_count": 21,
+    "roster_count": 22,
     "cap_space": -24132587.0,
     "apron_status": "over_cap",
     "rotation_salary": 149450330.0,
@@ -326,7 +326,7 @@
   {
     "team": "UTA",
     "total_salary": 181863431.0,
-    "roster_count": 21,
+    "roster_count": 20,
     "cap_space": -16902431.0,
     "apron_status": "over_cap",
     "rotation_salary": 162932291.0,
@@ -350,7 +350,7 @@
   {
     "team": "SAC",
     "total_salary": 191795907.0,
-    "roster_count": 21,
+    "roster_count": 20,
     "cap_space": -26834907.0,
     "apron_status": "over_cap",
     "rotation_salary": 131546803.0,
