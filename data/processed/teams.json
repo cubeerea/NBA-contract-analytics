@@ -1,9 +1,9 @@
 [
   {
     "team": "SAS",
-    "total_salary": 198315672.0,
-    "roster_count": 20,
-    "cap_space": -33354672.0,
+    "total_salary": 196130556.0,
+    "roster_count": 18,
+    "cap_space": -31169556.0,
     "apron_status": "over_cap",
     "rotation_salary": 186701455.0,
     "total_war": 51.474749346971414,
@@ -74,7 +74,7 @@
   {
     "team": "TOR",
     "total_salary": 202546651.0,
-    "roster_count": 21,
+    "roster_count": 20,
     "cap_space": -37585651.0,
     "apron_status": "over_tax",
     "rotation_salary": 191174084.0,
@@ -110,7 +110,7 @@
   {
     "team": "CLE",
     "total_salary": 207150518.0,
-    "roster_count": 22,
+    "roster_count": 21,
     "cap_space": -42189518.0,
     "apron_status": "over_tax",
     "rotation_salary": 201560899.0,
@@ -158,7 +158,7 @@
   {
     "team": "ATL",
     "total_salary": 193345720.0,
-    "roster_count": 20,
+    "roster_count": 21,
     "cap_space": -28384720.0,
     "apron_status": "over_cap",
     "rotation_salary": 181185917.0,
@@ -277,9 +277,9 @@
   },
   {
     "team": "LAC",
-    "total_salary": 189093587.0,
-    "roster_count": 22,
-    "cap_space": -24132587.0,
+    "total_salary": 186797316.0,
+    "roster_count": 21,
+    "cap_space": -21836316.0,
     "apron_status": "over_cap",
     "rotation_salary": 149450330.0,
     "total_war": 17.979495063779684,
@@ -326,7 +326,7 @@
   {
     "team": "UTA",
     "total_salary": 181863431.0,
-    "roster_count": 20,
+    "roster_count": 19,
     "cap_space": -16902431.0,
     "apron_status": "over_cap",
     "rotation_salary": 162932291.0,
