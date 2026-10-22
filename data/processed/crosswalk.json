@@ -140,6 +140,13 @@
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642846.png"
   },
   {
+    "bbref_slug": "balad01",
+    "nba_player_id": 1642380,
+    "name": "Adama-Alpha Bal",
+    "name_normalized": "adama alpha bal",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642380.png"
+  },
+  {
     "bbref_slug": "baldwpa01",
     "nba_player_id": 1631116,
     "name": "Patrick Baldwin Jr.",
@@ -406,6 +413,13 @@
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628971.png"
   },
   {
+    "bbref_slug": "brownda04",
+    "nba_player_id": 1642468,
+    "name": "Darius Brown II",
+    "name_normalized": "darius brown",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642468.png"
+  },
+  {
     "bbref_slug": "brownja02",
     "nba_player_id": 1627759,
     "name": "Jaylen Brown",
@@ -446,6 +460,13 @@
     "name": "Kobe Bufkin",
     "name_normalized": "kobe bufkin",
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641723.png"
+  },
+  {
+    "bbref_slug": "burtoty01",
+    "nba_player_id": 1631174,
+    "name": "Tyler Burton",
+    "name_normalized": "tyler burton",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631174.png"
   },
   {
     "bbref_slug": "butleji01",
@@ -735,6 +756,13 @@
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642384.png"
   },
   {
+    "bbref_slug": "cryerlj01",
+    "nba_player_id": 1643018,
+    "name": "LJ Cryer",
+    "name_normalized": "lj cryer",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1643018.png"
+  },
+  {
     "bbref_slug": "cunnica01",
     "nba_player_id": 1630595,
     "name": "Cade Cunningham",
@@ -966,6 +994,13 @@
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/203954.png"
   },
   {
+    "bbref_slug": "enarutr01",
+    "nba_player_id": 1642400,
+    "name": "Tristan Enaruna",
+    "name_normalized": "tristan enaruna",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642400.png"
+  },
+  {
     "bbref_slug": "essenno01",
     "nba_player_id": 1642855,
     "name": "Noa Essengue",
@@ -1078,6 +1113,13 @@
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629655.png"
   },
   {
+    "bbref_slug": "garcian01",
+    "nba_player_id": 1643158,
+    "name": "Andersson Garcia",
+    "name_normalized": "andersson garcia",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1643158.png"
+  },
+  {
     "bbref_slug": "gardnmy01",
     "nba_player_id": 1642066,
     "name": "Myron Gardner",
@@ -1132,6 +1174,13 @@
     "name": "Josh Giddey",
     "name_normalized": "josh giddey",
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630581.png"
+  },
+  {
+    "bbref_slug": "gilbeke01",
+    "nba_player_id": 1642933,
+    "name": "Keshon Gilbert",
+    "name_normalized": "keshon gilbert",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642933.png"
   },
   {
     "bbref_slug": "gilgesh01",
@@ -1202,6 +1251,13 @@
     "name": "Jerami Grant",
     "name_normalized": "jerami grant",
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/203924.png"
+  },
+  {
+    "bbref_slug": "grayha01",
+    "nba_player_id": 1643060,
+    "name": "Hayden Gray",
+    "name_normalized": "hayden gray",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1643060.png"
   },
   {
     "bbref_slug": "greenaj01",
@@ -1426,6 +1482,13 @@
     "name": "Haywood Highsmith",
     "name_normalized": "haywood highsmith",
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629312.png"
+  },
+  {
+    "bbref_slug": "hinsobl01",
+    "nba_player_id": 1642396,
+    "name": "Blake Hinson",
+    "name_normalized": "blake hinson",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642396.png"
   },
   {
     "bbref_slug": "holidaa01",
@@ -1701,6 +1764,13 @@
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629661.png"
   },
   {
+    "bbref_slug": "johnsch06",
+    "nba_player_id": 1643052,
+    "name": "Chaney Johnson",
+    "name_normalized": "chaney johnson",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1643052.png"
+  },
+  {
     "bbref_slug": "johnsja05",
     "nba_player_id": 1630552,
     "name": "Jalen Johnson",
@@ -1867,6 +1937,13 @@
     "name": "Luke Kennard",
     "name_normalized": "luke kennard",
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628379.png"
+  },
+  {
+    "bbref_slug": "kentja01",
+    "nba_player_id": 1643257,
+    "name": "Jayson Kent",
+    "name_normalized": "jayson kent",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1643257.png"
   },
   {
     "bbref_slug": "kesslwa01",
@@ -2093,6 +2170,13 @@
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/201567.png"
   },
   {
+    "bbref_slug": "loverla01",
+    "nba_player_id": 1643133,
+    "name": "Lawson Lovering",
+    "name_normalized": "lawson lovering",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1643133.png"
+  },
+  {
     "bbref_slug": "lowryky01",
     "nba_player_id": 200768,
     "name": "Kyle Lowry",
@@ -2177,6 +2261,13 @@
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631213.png"
   },
   {
+    "bbref_slug": "mashaja01",
+    "nba_player_id": 1642942,
+    "name": "Jahmai Mashack",
+    "name_normalized": "jahmai mashack",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642942.png"
+  },
+  {
     "bbref_slug": "mathega01",
     "nba_player_id": 1629726,
     "name": "Garrison Mathews",
@@ -2203,6 +2294,13 @@
     "name": "Tyrese Maxey",
     "name_normalized": "tyrese maxey",
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630178.png"
+  },
+  {
+    "bbref_slug": "mbengbe01",
+    "nba_player_id": 1643016,
+    "name": "Bez Mbeng",
+    "name_normalized": "bez mbeng",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1643016.png"
   },
   {
     "bbref_slug": "mcbrimi01",
@@ -2408,6 +2506,13 @@
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631111.png"
   },
   {
+    "bbref_slug": "moralal01",
+    "nba_player_id": 1631457,
+    "name": "Alex Morales",
+    "name_normalized": "alex morales",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631457.png"
+  },
+  {
     "bbref_slug": "moranja01",
     "nba_player_id": 1629630,
     "name": "Ja Morant",
@@ -2485,6 +2590,13 @@
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631250.png"
   },
   {
+    "bbref_slug": "nelsogr02",
+    "nba_player_id": 1641761,
+    "name": "Grant Nelson",
+    "name_normalized": "grant nelson",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641761.png"
+  },
+  {
     "bbref_slug": "nembhan01",
     "nba_player_id": 1629614,
     "name": "Andrew Nembhard",
@@ -2541,6 +2653,20 @@
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/203994.png"
   },
   {
+    "bbref_slug": "odurojo01",
+    "nba_player_id": 1642490,
+    "name": "Josh Oduro",
+    "name_normalized": "josh oduro",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642490.png"
+  },
+  {
+    "bbref_slug": "okanito01",
+    "nba_player_id": 1643253,
+    "name": "Toby Okani",
+    "name_normalized": "toby okani",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1643253.png"
+  },
+  {
     "bbref_slug": "okogijo01",
     "nba_player_id": 1629006,
     "name": "Josh Okogie",
@@ -2574,6 +2700,13 @@
     "name": "Kelly Olynyk",
     "name_normalized": "kelly olynyk",
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/203482.png"
+  },
+  {
+    "bbref_slug": "omierno01",
+    "nba_player_id": 1641807,
+    "name": "Norchad Omier",
+    "name_normalized": "norchad omier",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641807.png"
   },
   {
     "bbref_slug": "onealro01",
@@ -2616,6 +2749,13 @@
     "name": "Micah Peavy",
     "name_normalized": "micah peavy",
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642877.png"
+  },
+  {
+    "bbref_slug": "pedulse01",
+    "nba_player_id": 1642951,
+    "name": "Sean Pedulla",
+    "name_normalized": "sean pedulla",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642951.png"
   },
   {
     "bbref_slug": "pendano01",
@@ -2744,6 +2884,13 @@
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630695.png"
   },
   {
+    "bbref_slug": "poulajo01",
+    "nba_player_id": 1642967,
+    "name": "John Poulakidas",
+    "name_normalized": "john poulakidas",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642967.png"
+  },
+  {
     "bbref_slug": "poweldr01",
     "nba_player_id": 1642962,
     "name": "Drake Powell",
@@ -2856,6 +3003,13 @@
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630194.png"
   },
   {
+    "bbref_slug": "reeseju01",
+    "nba_player_id": 1642882,
+    "name": "Julian Reese",
+    "name_normalized": "julian reese",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642882.png"
+  },
+  {
     "bbref_slug": "reevean01",
     "nba_player_id": 1641810,
     "name": "Antonio Reeves",
@@ -2889,6 +3043,13 @@
     "name": "Will Richard",
     "name_normalized": "will richard",
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642954.png"
+  },
+  {
+    "bbref_slug": "richmka01",
+    "nba_player_id": 1642955,
+    "name": "Kadary Richmond",
+    "name_normalized": "kadary richmond",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642955.png"
   },
   {
     "bbref_slug": "rileywi01",
@@ -2961,6 +3122,13 @@
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1626156.png"
   },
   {
+    "bbref_slug": "ryanco01",
+    "nba_player_id": 1642504,
+    "name": "Cormac Ryan",
+    "name_normalized": "cormac ryan",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642504.png"
+  },
+  {
     "bbref_slug": "sabondo01",
     "nba_player_id": 1627734,
     "name": "Domantas Sabonis",
@@ -2987,6 +3155,13 @@
     "name": "Kobe Sanders",
     "name_normalized": "kobe sanders",
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642920.png"
+  },
+  {
+    "bbref_slug": "sandfpa01",
+    "nba_player_id": 1642362,
+    "name": "Payton Sandfort",
+    "name_normalized": "payton sandfort",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642362.png"
   },
   {
     "bbref_slug": "santogu01",
@@ -3204,6 +3379,13 @@
     "name": "Jabari Smith Jr.",
     "name_normalized": "jabari smith",
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631095.png"
+  },
+  {
+    "bbref_slug": "smithma02",
+    "nba_player_id": 1641869,
+    "name": "Malachi Smith",
+    "name_normalized": "malachi smith",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641869.png"
   },
   {
     "bbref_slug": "smithni01",
@@ -3764,6 +3946,13 @@
     "name": "Kenrich Williams",
     "name_normalized": "kenrich williams",
     "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629026.png"
+  },
+  {
+    "bbref_slug": "willilu01",
+    "nba_player_id": 1631351,
+    "name": "Lucas Williamson",
+    "name_normalized": "lucas williamson",
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631351.png"
   },
   {
     "bbref_slug": "willima07",
