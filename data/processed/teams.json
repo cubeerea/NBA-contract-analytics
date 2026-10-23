@@ -109,9 +109,9 @@
   },
   {
     "team": "MEM",
-    "total_salary": 136311503.0,
-    "roster_count": 23,
-    "cap_space": 28649497.0,
+    "total_salary": 132120983.0,
+    "roster_count": 22,
+    "cap_space": 32840017.0,
     "apron_status": "under_cap",
     "rotation_salary": 86225974.0,
     "total_war": 15.44755470871121,
@@ -218,7 +218,7 @@
   {
     "team": "DAL",
     "total_salary": 179403417.0,
-    "roster_count": 18,
+    "roster_count": 19,
     "cap_space": -14442417.0,
     "apron_status": "over_cap",
     "rotation_salary": 112328085.0,
@@ -326,7 +326,7 @@
   {
     "team": "UTA",
     "total_salary": 179414010.0,
-    "roster_count": 18,
+    "roster_count": 17,
     "cap_space": -14453010.0,
     "apron_status": "over_cap",
     "rotation_salary": 162932291.0,

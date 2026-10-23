@@ -4269,7 +4269,7 @@
     "contract_type": "rookie_scale",
     "salary_tier": "standard",
     "is_market_priced": false,
-    "guaranteed_remaining": 3991200.0,
+    "guaranteed_remaining": 10129666.0,
     "no_trade_clause": null,
     "trade_eligible": true,
     "trade_restriction_reason": ""
@@ -14574,7 +14574,7 @@
     "contract_type": "rookie_scale",
     "salary_tier": "rookie_scale",
     "is_market_priced": false,
-    "guaranteed_remaining": 3132360.0,
+    "guaranteed_remaining": 6414360.0,
     "no_trade_clause": null,
     "trade_eligible": true,
     "trade_restriction_reason": ""
@@ -14762,7 +14762,7 @@
   {
     "bbref_slug": "cissemo01",
     "nba_player_id": 1630619,
-    "name": "Moussa Cisse",
+    "name": "Moussa Ciss\u00e9",
     "headshot_url": "./data/headshots/1630619.png",
     "team": "DAL",
     "stats_team": "DAL",
