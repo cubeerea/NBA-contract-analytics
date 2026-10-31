@@ -2919,7 +2919,7 @@
     "contract_type": "rookie_scale",
     "salary_tier": "rookie_scale",
     "is_market_priced": false,
-    "guaranteed_remaining": 7519920.0,
+    "guaranteed_remaining": 17070218.0,
     "no_trade_clause": null,
     "trade_eligible": true,
     "trade_restriction_reason": ""
@@ -8184,7 +8184,7 @@
     "contract_type": "rookie_scale",
     "salary_tier": "minimum",
     "is_market_priced": false,
-    "guaranteed_remaining": 2744040.0,
+    "guaranteed_remaining": 7697033.0,
     "no_trade_clause": null,
     "trade_eligible": true,
     "trade_restriction_reason": ""
@@ -9309,7 +9309,7 @@
     "contract_type": "rookie_scale",
     "salary_tier": "rookie_scale",
     "is_market_priced": false,
-    "guaranteed_remaining": 3540600.0,
+    "guaranteed_remaining": 7249920.0,
     "no_trade_clause": null,
     "trade_eligible": true,
     "trade_restriction_reason": ""
@@ -9489,7 +9489,7 @@
     "contract_type": "rookie_scale",
     "salary_tier": "rookie_scale",
     "is_market_priced": false,
-    "guaranteed_remaining": 7233720.0,
+    "guaranteed_remaining": 14811960.0,
     "no_trade_clause": null,
     "trade_eligible": true,
     "trade_restriction_reason": ""
@@ -9894,7 +9894,7 @@
     "contract_type": "rookie_scale",
     "salary_tier": "rookie_scale",
     "is_market_priced": false,
-    "guaranteed_remaining": 4002000.0,
+    "guaranteed_remaining": 8195040.0,
     "no_trade_clause": null,
     "trade_eligible": true,
     "trade_restriction_reason": ""
@@ -10344,7 +10344,7 @@
     "contract_type": "rookie_scale",
     "salary_tier": "rookie_scale",
     "is_market_priced": false,
-    "guaranteed_remaining": 2941440.0,
+    "guaranteed_remaining": 6023280.0,
     "no_trade_clause": null,
     "trade_eligible": true,
     "trade_restriction_reason": ""
@@ -11559,7 +11559,7 @@
     "contract_type": "rookie_scale",
     "salary_tier": "rookie_scale",
     "is_market_priced": false,
-    "guaranteed_remaining": 2923560.0,
+    "guaranteed_remaining": 5986200.0,
     "no_trade_clause": null,
     "trade_eligible": true,
     "trade_restriction_reason": ""
@@ -12639,7 +12639,7 @@
     "contract_type": "rookie_scale",
     "salary_tier": "rookie_scale",
     "is_market_priced": false,
-    "guaranteed_remaining": 3028560.0,
+    "guaranteed_remaining": 6201480.0,
     "no_trade_clause": null,
     "trade_eligible": true,
     "trade_restriction_reason": ""
