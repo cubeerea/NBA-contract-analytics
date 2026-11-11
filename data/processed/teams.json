@@ -110,7 +110,7 @@
   {
     "team": "MEM",
     "total_salary": 129970066.0,
-    "roster_count": 22,
+    "roster_count": 21,
     "cap_space": 34990934.0,
     "apron_status": "under_cap",
     "rotation_salary": 86225974.0,
@@ -122,7 +122,7 @@
   {
     "team": "CLE",
     "total_salary": 207150518.0,
-    "roster_count": 19,
+    "roster_count": 18,
     "cap_space": -42189518.0,
     "apron_status": "over_tax",
     "rotation_salary": 201560899.0,
