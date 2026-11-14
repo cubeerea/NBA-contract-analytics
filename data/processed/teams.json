@@ -98,7 +98,7 @@
   {
     "team": "LAL",
     "total_salary": 197131679.0,
-    "roster_count": 19,
+    "roster_count": 20,
     "cap_space": -32170679.0,
     "apron_status": "over_cap",
     "rotation_salary": 154237731.0,
@@ -349,9 +349,9 @@
   },
   {
     "team": "SAC",
-    "total_salary": 188532507.0,
-    "roster_count": 16,
-    "cap_space": -23571507.0,
+    "total_salary": 190672231.0,
+    "roster_count": 17,
+    "cap_space": -25711231.0,
     "apron_status": "over_cap",
     "rotation_salary": 128283403.0,
     "total_war": 3.103859345154515,
