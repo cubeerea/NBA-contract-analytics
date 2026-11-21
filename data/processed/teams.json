@@ -158,7 +158,7 @@
   {
     "team": "ATL",
     "total_salary": 193345720.0,
-    "roster_count": 18,
+    "roster_count": 19,
     "cap_space": -28384720.0,
     "apron_status": "over_cap",
     "rotation_salary": 181185917.0,
@@ -326,7 +326,7 @@
   {
     "team": "UTA",
     "total_salary": 179414010.0,
-    "roster_count": 18,
+    "roster_count": 19,
     "cap_space": -14453010.0,
     "apron_status": "over_cap",
     "rotation_salary": 162932291.0,
